@@ -1,0 +1,48 @@
+.keyfacts {
+    bottom: 40px;
+    left: calc(45% + 40px);
+    position: absolute;
+    width: clamp(240px, 55vw - 400px, 480px);
+    z-index: 10;
+}
+
+.stacked {
+    margin: 0 auto;
+    max-width: 640px;
+    padding: 0 30px;
+}
+
+.fact {
+    margin-bottom: 20px;
+    padding-left: 44px;
+    position: relative;
+}
+
+.fact h3 {
+    text-transform: uppercase;
+}
+
+.fact p {
+    font-size: 1rem;
+    font-weight: var(--light);
+    max-width: 460px;
+}
+
+.icon svg {
+    height: 35px;
+    left: 0;
+    position: absolute;
+    top: -5px;
+    width: 28px;
+}
+
+@media (min-width: 1024px) and (max-width: 1365px) {
+    .keyfacts {
+        left: calc(40% + 40px);
+        width: calc(60vw - 340px);
+    }
+
+    .fact {
+        margin-bottom: 12px;
+    }
+}

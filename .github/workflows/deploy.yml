@@ -1,0 +1,49 @@
+env:
+  PROJECT_ID: firebase-cloud-491613
+  SITE_ID: outrun
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - uses: actions/setup-node@v4
+        with:
+          cache: npm
+          node-version-file: .nvmrc
+
+      - run: npm ci
+
+      - run: npm run check
+
+      - run: npm run build
+
+      - name: Accessibility
+        run: |
+          npx playwright-core install --with-deps chromium
+          npm start &
+          timeout 60 sh -c 'until curl -sf http://localhost:3010/en > /dev/null; do sleep 1; done'
+          CI=1 npm run a11y
+
+      - if: github.ref_name == github.event.repository.default_branch
+        uses: google-github-actions/auth@v2
+        with:
+          service_account: ${{ secrets.GCP_SA_EMAIL }}
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+
+      - if: github.ref_name == github.event.repository.default_branch
+        name: Deploy to Firebase Hosting
+        run: |
+          npm install -g firebase-tools
+          firebase deploy --only hosting:${SITE_ID} --project=${PROJECT_ID} --non-interactive
+
+name: Deploy
+
+on: [push, workflow_dispatch]
+
+permissions:
+  contents: read
+  id-token: write

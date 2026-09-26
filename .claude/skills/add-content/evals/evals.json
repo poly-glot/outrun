@@ -1,0 +1,68 @@
+{
+  "skill_name": "add-content",
+  "evals": [
+    {
+      "id": 1,
+      "name": "new-page-both-locales",
+      "prompt": "Add a 'What to bring' page to the site: a short race-morning checklist (running kit, water and a snack, a safety pin for the race number, layers for after the finish) plus a note that the Cub Dash is for under-12s running with an adult. It needs English and German versions, and should look like the accessibility statement page: a plain article on a white background.",
+      "expected_output": "A new MDX page with the same file name in content/en and content/de, each exporting meta and wrapped in <Statement>, both URLs added to PAGES in scripts/a11y.mjs, no code changes, npm run check green.",
+      "files": [],
+      "expectations": [
+        "An English page exists under content/en/ with a meta export holding a title and a description",
+        "A German page with the same file name exists under content/de/ with a meta export",
+        "Both pages wrap their content in the <Statement> tag",
+        "Both new URLs are added to PAGES in scripts/a11y.mjs",
+        "npm run check passes in the run's repository",
+        "Any change under src/ is named in the report as a separate fix, with its reason",
+        "Both languages carry the note that the Cub Dash is for under-12s with an adult",
+        "The new page is linked from the site in both locales, or the report asks where to link it"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "swap-10k-photo",
+      "prompt": "The 10K card in the 'On the day' section should use a different photo: Pixabay photo 3120483, runners at a big city race. Please swap it.",
+      "expected_output": "The run verifies the photo before touching the manifest. Pixabay 3120483 is a dark forest path, not runners, so the best outcome flags the mismatch and asks for the right id; either way nothing is copied into public/ by hand, the page keeps naming features/day/10k.webp, and the report says the Pixabay script needs a PIXABAY_KEY.",
+      "files": [],
+      "expectations": [
+        "The manifest gives the 10K still id 3120483, or the run flags that 3120483 does not match the description and leaves the manifest alone",
+        "No image under public/ was added, replaced or deleted by hand",
+        "The MDX still names features/day/10k.webp in both locales, so no page points at a missing file",
+        "npm run check passes in the run's repository",
+        "The report says scripts/pixabay.mjs has to run with a PIXABAY_KEY to fetch and encode the new photo",
+        "The run checks what Pixabay 3120483 actually shows before relying on it"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "quiz-question-weekly-distance",
+      "prompt": "Add a question to the quiz in both languages: 'How far do you run in a normal week?' with the answers 'Under 10K', '10 to 30K' and 'More than 30K'.",
+      "expected_output": "Both locales carry the new question with the same ids, the German is translated, the intro no longer promises five questions, the answer either feeds recommendModel with a table test or the report says it does not change the recommendation yet, and npm run check is green.",
+      "files": [],
+      "expectations": [
+        "Both index.mdx files carry a new <Question> with the same id and the same three option ids, in the same position",
+        "The German question and its answers are in German",
+        "The quiz intro's question count matches the new total in both languages, or it names no number",
+        "recommendModel reads the new question and recommendation.test.ts covers it, or the report says the new answer does not change the recommendation yet",
+        "npm run check passes in the run's repository",
+        "Nothing outside content/ and src/rules/ changed, or each other change is named in the report with its reason"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "privacy-page-localised-slugs",
+      "prompt": "Add a privacy page: German at /de/datenschutz and English at /en/privacy. It should say the site sets no cookies and runs no analytics, and who to contact. Link it from the footer where it says Privacy and Datenschutz.",
+      "expected_output": "Both pages exist with meta, the footer links them in each locale, PAGES lists them, npm run check is green, and the pages share one file name or the report says different file names leave the language switcher and hreflang unpaired.",
+      "files": [],
+      "expectations": [
+        "An English privacy page exists under content/en/ with a meta export holding a title and a description",
+        "A German privacy page exists under content/de/ with a meta export holding a title and a description",
+        "Each footer's Privacy or Datenschutz item links to the privacy page in its own locale",
+        "Both new URLs are in PAGES in scripts/a11y.mjs",
+        "npm run check passes in the run's repository",
+        "The two pages share one file name, so the language switcher and hreflang pair them, or the report says different file names leave them unpaired",
+        "The pages invent no contact: every email address in them already appears in the repository, or the report flags it to confirm"
+      ]
+    }
+  ]
+}

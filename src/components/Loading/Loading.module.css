@@ -1,0 +1,52 @@
+.container {
+    animation: appear 200ms 600ms both;
+    font-size: 0.875rem;
+    left: 50%;
+    pointer-events: none;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+}
+
+.dots {
+    display: block;
+    height: 1em;
+    margin: 0 auto 8px;
+    position: relative;
+    width: 4em;
+}
+
+.dot {
+    animation: 0.5s ease infinite;
+    background: var(--brand);
+    border-radius: 0.5em;
+    height: 1em;
+    position: absolute;
+    width: 1em;
+}
+
+.dot1 { animation-name: reveal; composes: dot; left: 0; }
+.dot2 { animation-name: slide; composes: dot; left: 0; }
+.dot3 { animation-name: slide; composes: dot; left: 1.5em; }
+.dot4 { animation-direction: reverse; animation-name: reveal; composes: dot; left: 3em; }
+
+.text {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+@keyframes appear {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes reveal {
+    from { transform: scale(0.001); }
+    to { transform: scale(1); }
+}
+
+@keyframes slide {
+    to { transform: translateX(1.5em); }
+}

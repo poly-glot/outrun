@@ -1,0 +1,32 @@
+.page {
+    color: #fff;
+    min-height: calc(100vh - var(--bar-height));
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+
+.normalPage {
+    min-height: 10px;
+}
+
+.white {
+    color: #000;
+}
+
+@media screen and (min-width: 768px) and (max-height: 500px) {
+    .page,
+    .normalPage {
+        min-height: 600px;
+    }
+}
+
+@media screen and (min-height: 1080px) {
+    .page {
+        min-height: 1080px;
+    }
+
+    .normalPage {
+        min-height: 10px;
+    }
+}

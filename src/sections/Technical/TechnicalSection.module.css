@@ -1,0 +1,60 @@
+.container {
+    background: #fff;
+    color: #000;
+    position: relative;
+}
+
+.content {
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.text {
+    overflow: hidden;
+    position: relative;
+}
+
+.text p {
+    font-size: 1.1rem;
+}
+
+.itemHeading {
+    font-weight: 700;
+    margin: 10px 0;
+    text-transform: uppercase;
+}
+
+.listContainer {
+    padding-bottom: 30px;
+    position: relative;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    max-width: 760px;
+}
+
+.three60 {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    width: 40%;
+}
+
+@media (min-width: 980px) {
+    .three60 {
+        display: block;
+    }
+}
+
+@media (max-width: 767px) {
+    .text p {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,73 @@
+.container {
+    position: relative;
+}
+
+.container h3 {
+    font-size: var(--h5);
+}
+
+.scene {
+    display: none;
+}
+
+.stack {
+    display: block;
+    padding: 40px 0 20px;
+}
+
+.stackIntro {
+    margin: 0 auto;
+    max-width: 640px;
+    padding: 20px 30px 30px;
+}
+
+.stackIntro h2 {
+    margin-bottom: 1rem;
+}
+
+.stackIntro p {
+    font-size: 1rem;
+}
+
+.stackImage {
+    aspect-ratio: 4 / 5;
+    margin: 0 auto 30px;
+    max-width: 480px;
+    position: relative;
+    width: 100%;
+}
+
+.stackImage img {
+    object-fit: contain;
+}
+
+@media (min-width: 1024px) {
+    .scene {
+        display: block;
+        min-height: 300vh;
+        position: relative;
+    }
+
+    .stack {
+        display: none;
+    }
+
+    .pane {
+        height: calc(100vh - var(--bar-height));
+        margin: 0;
+        overflow: hidden;
+        position: sticky;
+        top: var(--bar-height);
+        width: 100%;
+    }
+}
+
+@media (min-width: 1024px) {
+    :global(body[data-motion-paused]) .scene {
+        min-height: 0;
+    }
+
+    :global(body[data-motion-paused]) .pane {
+        position: static;
+    }
+}

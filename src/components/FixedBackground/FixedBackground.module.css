@@ -1,0 +1,25 @@
+.container {
+    display: none;
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+.shadow {
+    height: 100%;
+    left: 0;
+    max-width: 768px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+}
+
+@media (min-width: 768px) {
+    .container {
+        display: block;
+    }
+}

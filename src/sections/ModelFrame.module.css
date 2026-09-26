@@ -1,0 +1,28 @@
+.frame {
+    background: #fff;
+    border-bottom: 2px solid var(--brand);
+    min-height: 420px;
+    padding-bottom: 30px;
+    position: relative;
+    width: 100%;
+}
+
+.frameHeading {
+    align-items: center;
+    border-bottom: 2px solid var(--brand);
+    display: flex;
+    font-weight: 700;
+    min-height: 36px;
+    padding-left: 8px;
+    position: relative;
+}
+
+@media (max-width: 767px) {
+    .frame {
+        min-height: 300px;
+    }
+}
+
+.frameHeading {
+    text-transform: uppercase;
+}

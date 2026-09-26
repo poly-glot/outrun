@@ -1,0 +1,7 @@
+{
+  "exclude": [
+    ".next/",
+    "out/",
+    "public/media/"
+  ]
+}

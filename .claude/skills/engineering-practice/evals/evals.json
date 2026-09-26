@@ -1,0 +1,54 @@
+{
+  "skill_name": "engineering-practice",
+  "evals": [
+    {
+      "id": 1,
+      "name": "back-to-top-link",
+      "prompt": "Add a 'Back to top' link just above the footer on every page that takes the reader back to the top. English text 'Back to top', German 'Nach oben'.",
+      "expected_output": "The words come from SiteStrings and both site.mdx files, the link is a plain fragment link, the new code has no comments and alphabetical CSS, npm run check is green, and CLAUDE.md mentions the addition.",
+      "files": [],
+      "expectations": [
+        "SiteStrings and both site.mdx files carry the new string: 'Back to top' in English and 'Nach oben' in German",
+        "No component hard-codes the link text; it is read through useStrings",
+        "The link is a fragment link (href=\"#...\") with no preventDefault and no scroll call",
+        "The new or changed TS, TSX and CSS carry no comments",
+        "CSS properties in the new or changed rules are in alphabetical order",
+        "npm run check passes in the run's repository",
+        "CLAUDE.md mentions the new link or component",
+        "A journey or test checks the new link's behaviour, so removing its target would fail a gate",
+        "The side menu's closed labels stop taking taps, fixed at the source in SideMenu.module.css and named in the report, not worked around with a z-index on the new link"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "fix-de-header-overlap",
+      "prompt": "On phones the German header's 'Animation stoppen' button is covered by the centred logo: axe reports a target-size failure on /de/accessibility at 390px wide. Fix it.",
+      "expected_output": "A header-level fix after which axe passes on every page and width, the keyboard journeys pass, content and strings are untouched, npm run check is green, and the report says what was verified and what could not be.",
+      "files": [],
+      "expectations": [
+        "axe's target-size rule passes on /de/accessibility at 390x844 after the change",
+        "The full axe run finds no serious or critical violation on any page at either width",
+        "The keyboard journeys still pass",
+        "The fix lives in the header's own component or stylesheet, not in content or strings",
+        "npm run check passes in the run's repository",
+        "The new or changed code carries no comments",
+        "The report states what was run to verify the fix and names any check it could not run, such as Firefox",
+        "The change adds a gate that detects a control covered at its centre, which axe missed"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "family-coalition-rule",
+      "prompt": "Change the quiz so that anyone who says the whole family is coming is recommended Coalition, even if they'd rather give money.",
+      "expected_output": "recommendModel sends a family who would rather give money to Coalition, its table test covers that case, every answer set without the family answer keeps its old recommendation, npm run check is green, and the new code has no comments.",
+      "files": [],
+      "expectations": [
+        "recommendModel returns Coalition for { company: 'family', give: 'money' }",
+        "recommendation.test.ts has a case with the family answer and money together",
+        "Every answer set without the family answer gets the same recommendation as before",
+        "npm run check passes in the run's repository",
+        "The new or changed code carries no comments"
+      ]
+    }
+  ]
+}

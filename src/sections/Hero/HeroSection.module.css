@@ -1,0 +1,32 @@
+.container {
+    height: calc(100vh - var(--bar-height));
+    min-height: 480px;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+    width: 100%;
+}
+
+.video {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+}
+
+.heading {
+    color: #fff;
+    pointer-events: none;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+
+@media (min-width: 1024px) {
+    .container {
+        align-items: center;
+        display: grid;
+    }
+}

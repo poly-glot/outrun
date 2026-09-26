@@ -1,0 +1,73 @@
+.saving {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.icon {
+    align-items: flex-end;
+    display: flex;
+    height: 48px;
+    justify-content: center;
+    width: 100%;
+}
+
+.icon :global(svg.small-icon) {
+    height: 36px;
+}
+
+.iconInner {
+    display: inline-block;
+    position: relative;
+}
+
+.sticker {
+    align-items: center;
+    background: var(--brand);
+    border-radius: 16px;
+    color: #000;
+    display: flex;
+    font-size: 0.75rem;
+    font-weight: 700;
+    height: 32px;
+    justify-content: center;
+    left: -20px;
+    min-width: 32px;
+    padding: 0 4px;
+    position: absolute;
+    top: -12px;
+    white-space: nowrap;
+}
+
+.numbers {
+    align-items: center;
+    color: var(--brand);
+    display: flex;
+    flex-direction: column;
+    font-size: var(--h4);
+    font-weight: 700;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.sign {
+    font-size: var(--h6);
+    font-weight: 400;
+    text-align: center;
+}
+
+@media (max-width: 1023px) {
+    .icon svg path {
+        fill: #000;
+    }
+
+    .numbers {
+        color: #000;
+    }
+}
+
+@media (max-width: 767px) {
+    .sign {
+        font-size: 1rem;
+    }
+}

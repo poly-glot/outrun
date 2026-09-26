@@ -1,0 +1,45 @@
+{
+    "skill_name": "new-campaign",
+    "evals": [
+        {
+            "id": 1,
+            "name": "tide-turners-groundwork",
+            "prompt": "We're reusing this page for a new campaign, Tide Turners: a UK beach clean-up series at tideturners.junaid.guru. The three ways to join are Picker (turn up on the day and clean), Crew Captain (bring a group) and Backer (fund kit and skips). Do the groundwork in the repo: site configuration, the quiz recommendation rule for the three options, hosting config, and the Terraform in firebase-cloud. Don't write the page copy yet, don't download media and don't push anything.",
+            "expected_output": "site.config.ts carries the new siteUrl and three models, recommendModel and its test cover the new ids, firebase.json, .firebaserc and deploy.yml share a new site id, firebase-cloud gains an app file and outputs, model references stay consistent, and the report lists what is left and what is the user's call.",
+            "files": [],
+            "expectations": [
+                "siteUrl in content/site.config.ts is https://tideturners.junaid.guru",
+                "site.config.ts defines exactly three models, for Picker, Crew Captain and Backer",
+                "recommendModel returns only the new model ids and its test covers each of them",
+                "npm run check passes in the run's repository",
+                "firebase.json, .firebaserc and .github/workflows/deploy.yml all name the same new Hosting site id",
+                "firebase-cloud has a terraform/apps file with custom_domain tideturners.junaid.guru, and its outputs are added to both outputs files",
+                "Every model id the MDX references matches site.config.ts in both locales, or the report flags the mismatch as the next step",
+                "The report lists what is left (copy, media, logo) and leaves pushing, secrets and DNS to the user",
+                "public/manifest.json names Tide Turners",
+                "The docs name the new site: README.MD or CLAUDE.md mentions tideturners",
+                "The brand name in Header.tsx and src/conventions.test.ts changes together, or the report lists it as a next step",
+                "The report warns that working in the Outrun repo would retarget or overwrite the live deploy, or sets the work up for a new repo"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "ebike-launch-plan",
+            "prompt": "Could this page work for a product launch instead? It's a new e-bike with three models: City, Trail and Cargo. Don't change anything yet; give me the plan: what changes where, what you need from me, and what stays as it is.",
+            "expected_output": "A plan with no file changes that maps City, Trail and Cargo onto the three models, walks the page section by section, notes that product imagery must come from the client, covers hosting, logo and typeface licence, and asks for facts rather than inventing them.",
+            "files": [],
+            "expectations": [
+                "No file in the repository was changed",
+                "The plan maps City, Trail and Cargo onto the page's three models (site.config, the quiz rule, the turntables and the feature filters)",
+                "The plan walks the page section by section, naming at least seven of the nine section tags",
+                "The plan says the product imagery has to come from the client, because stock photos cannot show the real bike",
+                "The plan covers hosting through firebase-cloud, a Firebase site and the GitHub workflow",
+                "The plan asks the user for the facts it needs (specifications, prices, domain, dates) instead of inventing them",
+                "The plan mentions replacing the logo and checking the typeface licence",
+                "The plan covers the brand colour and its contrast against black",
+                "The plan names manifest.json or the favicon",
+                "The plan keeps the work from deploying over the live Outrun site: a new repo, or a branch nothing deploys"
+            ]
+        }
+    ]
+}

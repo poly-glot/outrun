@@ -1,0 +1,50 @@
+.inner {
+    max-width: 620px;
+}
+
+.inner h3 {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.charts {
+    column-gap: 30px;
+    display: grid;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+    grid-template-rows: auto auto;
+    margin-top: 40px;
+}
+
+.savings {
+    margin-top: 20px;
+}
+
+.savingsRow {
+    column-gap: 30px;
+    display: grid;
+    grid-auto-columns: minmax(0, 1fr);
+    grid-auto-flow: column;
+}
+
+.note {
+    font-size: 0.75rem;
+    font-weight: var(--light);
+    margin-top: 20px;
+}
+
+@media (max-width: 767px) {
+    .inner {
+        width: 100%;
+    }
+
+    .inner h3 {
+        font-size: 0.8rem;
+    }
+
+    .charts,
+    .savingsRow {
+        column-gap: 8px;
+    }
+}

@@ -1,0 +1,15 @@
+.link {
+    background: var(--brand);
+    color: #000;
+    left: 0;
+    padding: 8px 16px;
+    position: absolute;
+    top: 0;
+    transform: translateY(-100%);
+    z-index: 10;
+}
+
+.link:focus {
+    transform: translateY(0);
+    z-index: calc(var(--z-modal) + 2);
+}

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "codegraph": {
+      "type": "stdio",
+      "command": "codegraph",
+      "args": ["serve", "--mcp"]
+    },
+    "zvec_grep": {
+      "type": "stdio",
+      "command": "zg",
+      "args": ["server", "--stdio"]
+    }
+  }
+}

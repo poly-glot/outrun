@@ -1,0 +1,160 @@
+{
+    "gallery": [
+        8242729,
+        4818603,
+        2859581,
+        5689870,
+        171315,
+        7277665,
+        3424526,
+        7438381,
+        5177601,
+        10327323,
+        4405001,
+        1036450
+    ],
+    "videos": [
+        {
+            "id": 307555,
+            "use": "Hero video and still, encoded by scripts/hero-video.sh"
+        },
+        {
+            "id": 264386,
+            "use": "Where your miles go, the clip the scroll plays"
+        },
+        {
+            "id": 232970,
+            "use": "The header logo, traced frame by frame from this silhouette clip"
+        },
+        {
+            "id": 336178,
+            "use": "Downloaded for the hero, not on the page"
+        }
+    ],
+    "turntables": [
+        {
+            "folder": "360/solo",
+            "id": 307555,
+            "start": 14,
+            "seconds": 1.2,
+            "frames": 36,
+            "crop": "crop=ih*4/3:ih:(iw-ih*4/3)/2:0",
+            "use": "Three ways in, the Solo frames the drag scrubs"
+        },
+        {
+            "folder": "360/coalition",
+            "id": 202278,
+            "start": 2,
+            "seconds": 3,
+            "frames": 36,
+            "crop": "crop=ih*4/3:ih:(iw-ih*4/3)/2:0",
+            "use": "Three ways in, the Coalition frames the drag scrubs"
+        },
+        {
+            "folder": "360/guardian",
+            "id": 264386,
+            "start": 1,
+            "seconds": 3,
+            "frames": 36,
+            "crop": "crop=iw:iw*3/4:0:ih*0.27",
+            "use": "Three ways in, the Guardian frames the drag scrubs"
+        }
+    ],
+    "stills": [
+        {
+            "file": "features/day/5k.webp",
+            "id": 5605529,
+            "use": "On the day, The 5K"
+        },
+        {
+            "file": "features/day/10k.webp",
+            "id": 4646827,
+            "use": "On the day, The 10K"
+        },
+        {
+            "file": "features/day/cub-dash.webp",
+            "id": 6665603,
+            "use": "On the day, The Cub Dash"
+        },
+        {
+            "file": "features/day/race-the-cheetah.webp",
+            "id": 1201014,
+            "use": "On the day, Race the Cheetah"
+        },
+        {
+            "file": "features/day/guardian-line.webp",
+            "id": 8297611,
+            "use": "On the day, The Guardian Line"
+        },
+        {
+            "file": "features/day/finish.webp",
+            "id": 2405991,
+            "use": "On the day, The Finish"
+        },
+        {
+            "file": "features/kit/fundraising-page.webp",
+            "id": 410311,
+            "use": "In your kit bag, Your fundraising page"
+        },
+        {
+            "file": "features/kit/training-plan.webp",
+            "id": 1470061,
+            "use": "In your kit bag, The training plan"
+        },
+        {
+            "file": "features/kit/captains-pack.webp",
+            "id": 1979261,
+            "use": "In your kit bag, The captain's pack"
+        },
+        {
+            "file": "features/kit/school-pack.webp",
+            "id": 4784917,
+            "use": "In your kit bag, The school pack"
+        },
+        {
+            "file": "features/kit/matched-giving.webp",
+            "id": 3091906,
+            "use": "In your kit bag, Matched giving"
+        },
+        {
+            "file": "features/kit/field-updates.webp",
+            "id": 10271817,
+            "use": "In your kit bag, Field updates"
+        },
+        {
+            "file": "features/kit/sponsor-a-runner.webp",
+            "id": 7876675,
+            "use": "In your kit bag, Sponsor a runner"
+        },
+        {
+            "file": "features/cheetah/nought-to-sixty.webp",
+            "id": 2859581,
+            "use": "Know your cheetah, Nought to sixty"
+        },
+        {
+            "file": "features/cheetah/seven-metres.webp",
+            "id": 10327323,
+            "use": "Know your cheetah, Seven metres a stride"
+        },
+        {
+            "file": "features/cheetah/tear-marks.webp",
+            "id": 3450433,
+            "use": "Know your cheetah, The tear marks"
+        },
+        {
+            "file": "features/cheetah/cant-roar.webp",
+            "id": 3424526,
+            "use": "Know your cheetah, The cat that can't roar"
+        },
+        {
+            "file": "features/cheetah/four-subspecies.webp",
+            "id": 10274270,
+            "use": "Know your cheetah, One species, four subspecies"
+        },
+        {
+            "file": "features/cheetah/india.webp",
+            "id": 7143835,
+            "use": "Know your cheetah, India got its cheetahs back"
+        }
+    ]
+}

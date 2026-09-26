@@ -1,0 +1,89 @@
+.container {
+    margin: 0 auto;
+    max-width: 990px;
+    padding: 100px 15px;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+}
+
+.heading h2 {
+    margin-bottom: 30px;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.feature {
+    border-bottom: 1px solid #999;
+    margin: 30px 10px;
+    padding-bottom: 40px;
+    position: relative;
+    width: 300px;
+}
+
+.thumbnail {
+    height: auto;
+    margin-bottom: 15px;
+    width: 300px;
+}
+
+.videoButton {
+    display: block;
+    position: relative;
+}
+
+.videoButton::before {
+    background: url('/youtube-icon.svg') no-repeat center;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+.feature h3 {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.feature p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.share {
+    bottom: 10px;
+    left: 0;
+    position: absolute;
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding: 50px 15px;
+    }
+
+    .feature {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .thumbnail {
+        width: 100%;
+    }
+
+    .heading h2 {
+        margin-bottom: 0;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+        max-width: 640px;
+    }
+}

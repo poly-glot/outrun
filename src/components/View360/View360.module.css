@@ -1,0 +1,59 @@
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.stage {
+    aspect-ratio: 4 / 3;
+    cursor: grab;
+    overflow: hidden;
+    position: relative;
+    touch-action: pan-y;
+    user-select: none;
+    width: 100%;
+}
+
+.stage:active {
+    cursor: grabbing;
+}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    display: block;
+    height: 20px;
+    margin: 4px auto 0;
+    width: 80%;
+}
+
+.slider::-webkit-slider-runnable-track {
+    background: #ddd;
+    height: 4px;
+}
+
+.slider::-moz-range-track {
+    background: #ddd;
+    height: 4px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--brand);
+    border: 2px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 16px;
+    margin-top: -6px;
+    width: 16px;
+}
+
+.slider::-moz-range-thumb {
+    background: var(--brand);
+    border: 2px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 16px;
+    width: 16px;
+}

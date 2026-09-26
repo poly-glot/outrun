@@ -1,0 +1,57 @@
+.chart {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    justify-items: center;
+    text-align: center;
+}
+
+.chart h3 {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.figure {
+    position: relative;
+}
+
+.svg {
+    height: 125px;
+    width: 125px;
+}
+
+.numbers {
+    align-items: center;
+    color: #000;
+    display: flex;
+    font-size: 2rem;
+    font-weight: 700;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 100%;
+}
+
+.sign {
+    align-self: flex-start;
+    font-size: var(--h5);
+    margin-top: 2px;
+}
+
+@media (max-width: 767px) {
+    .chart h3 {
+        font-size: 0.8rem;
+    }
+
+    .svg {
+        height: 100px;
+        width: 100px;
+    }
+
+    .numbers {
+        font-size: 1.6rem;
+    }
+}

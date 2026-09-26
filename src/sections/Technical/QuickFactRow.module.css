@@ -1,0 +1,56 @@
+.item {
+    display: flex;
+    flex: 1 0 100%;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.inner {
+    align-items: center;
+    display: flex;
+    max-width: 400px;
+    width: 100%;
+}
+
+.icon {
+    align-items: center;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    height: 64px;
+    justify-content: center;
+    margin-right: 20px;
+    width: 64px;
+}
+
+.iconImage {
+    height: auto;
+    width: 40px;
+}
+
+.label {
+    text-transform: uppercase;
+}
+
+.value {
+    display: flex;
+    flex: 1 0 auto;
+    font-weight: var(--light);
+    justify-content: flex-end;
+    position: relative;
+}
+
+@media (max-width: 767px) {
+    .label {
+        font-size: 0.8rem;
+    }
+
+    .icon {
+        height: 40px;
+        width: 40px;
+    }
+
+    .iconImage {
+        width: 26px;
+    }
+}

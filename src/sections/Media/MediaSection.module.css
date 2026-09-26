@@ -1,0 +1,118 @@
+.container {
+    margin: 0 auto;
+    max-width: 640px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.container p {
+    font-size: 1rem;
+}
+
+.preview {
+    position: relative;
+}
+
+.carousel {
+    background: #000;
+    position: relative;
+    user-select: none;
+}
+
+.track {
+    aspect-ratio: 16 / 9;
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+    display: none;
+}
+
+.slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+}
+
+.slideImage {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.nav {
+    color: #fff;
+    opacity: 0.85;
+    padding: 20px 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: opacity 200ms;
+    z-index: 2;
+}
+
+.nav:hover {
+    opacity: 1;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.next svg {
+    transform: scaleX(-1);
+}
+
+.download {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin: 10px 0;
+    position: relative;
+}
+
+.downloadButton {
+    flex: 1 0 100%;
+    padding: 0.7rem 0;
+}
+
+.downloadAll {
+    color: #fff;
+    text-decoration: none;
+}
+
+.share {
+    margin-left: auto;
+}
+
+.thumbnails {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    scrollbar-width: thin;
+    width: 100%;
+}
+
+.thumbnail {
+    background: #fff;
+    flex: 0 0 100px;
+    height: 56px;
+    opacity: 1;
+    transition: opacity 300ms var(--easing);
+    width: 100px;
+}
+
+.thumbnailActive {
+    opacity: 0.2;
+}

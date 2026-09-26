@@ -1,0 +1,13 @@
+node_modules
+.firebase/
+.next/
+out/
+next-env.d.ts
+tsconfig.tsbuildinfo
+.codegraph/
+.zvec-grep/
+.DS_Store
+.env*.local
+firebase-debug.log
+npm-debug.log*
+.idea/

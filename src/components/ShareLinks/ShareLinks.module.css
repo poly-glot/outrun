@@ -1,0 +1,16 @@
+.share {
+    align-items: center;
+    color: inherit;
+    display: flex;
+    gap: 2px;
+    opacity: 0.75;
+}
+
+.share a {
+    display: block;
+    padding: 4px;
+}
+
+.share a:hover {
+    opacity: 1;
+}

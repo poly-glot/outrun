@@ -1,0 +1,80 @@
+.container {
+    align-items: center;
+    bottom: 10px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+    justify-content: flex-end;
+    left: 0;
+    position: absolute;
+    text-decoration: none;
+    width: 100%;
+    z-index: 10;
+}
+
+.mousey {
+    border: 2px solid #fff;
+    border-radius: 13px;
+    box-sizing: content-box;
+    display: block;
+    height: 18px;
+    opacity: 0.75;
+    padding: 8px 8px;
+    width: 3px;
+}
+
+.scroller {
+    animation: scroll 2.2s cubic-bezier(0.15, 0.41, 0.69, 0.94) infinite;
+    background-color: #fff;
+    border-radius: 25%;
+    display: block;
+    height: 10px;
+    width: 3px;
+}
+
+.arrow {
+    animation: down 0.7s infinite alternate;
+    display: none;
+}
+
+.text {
+    font-size: var(--small);
+    font-weight: 700;
+    padding: 10px;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+    text-transform: uppercase;
+}
+
+@keyframes scroll {
+    0% { opacity: 0; }
+    10% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(15px); }
+}
+
+@keyframes down {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(12px); }
+}
+
+@media (hover: none) {
+    .mousey {
+        display: none;
+    }
+
+    .arrow {
+        display: block;
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        height: 60px;
+    }
+}
+
+@media screen and (max-width: 767px) and (orientation: portrait) {
+    .container {
+        bottom: 80px;
+    }
+}

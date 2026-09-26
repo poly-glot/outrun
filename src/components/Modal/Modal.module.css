@@ -1,0 +1,55 @@
+.modal {
+    background: transparent;
+    border: 0;
+    color: #fff;
+    height: 100%;
+    inset: 0;
+    margin: 0;
+    max-height: none;
+    max-width: none;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0;
+    position: fixed;
+    transition: opacity 300ms ease-in-out, overlay 300ms allow-discrete, display 300ms allow-discrete;
+    width: 100%;
+}
+
+.modal[open] {
+    opacity: 1;
+}
+
+@starting-style {
+    .modal[open] {
+        opacity: 0;
+    }
+}
+
+.modal::backdrop {
+    background: transparent;
+}
+
+.scroller {
+    -webkit-overflow-scrolling: touch;
+    height: calc(100vh - var(--bar-height));
+    margin-top: var(--bar-height);
+    overflow: auto;
+    position: relative;
+}
+
+.video {
+    align-items: center;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    height: calc(100vh - var(--bar-height));
+    justify-content: center;
+    padding: 20px;
+}
+
+.videoFrame {
+    aspect-ratio: 16 / 9;
+    max-height: 100%;
+    max-width: 960px;
+    position: relative;
+    width: 100%;
+}

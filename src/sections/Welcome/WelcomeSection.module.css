@@ -1,0 +1,19 @@
+.background {
+    display: none;
+}
+
+@media (max-width: 1023px) {
+    .container {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .background {
+        display: block;
+        flex: 1 0 auto;
+        height: auto;
+        min-height: 50vh;
+        position: relative;
+    }
+}

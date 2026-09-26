@@ -1,0 +1,15 @@
+.clip {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 45%;
+}
+
+@media (min-width: 1024px) and (max-width: 1365px) {
+    .clip {
+        width: 40%;
+    }
+}

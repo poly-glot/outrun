@@ -1,0 +1,43 @@
+.intro {
+    position: absolute;
+    right: 20px;
+    text-align: right;
+    top: 60px;
+    width: 330px;
+    z-index: 1;
+}
+
+.heading {
+    overflow: hidden;
+}
+
+.line {
+    display: block;
+    overflow: hidden;
+}
+
+.lineInner {
+    display: block;
+}
+
+.text {
+    font-size: 1.2rem;
+}
+
+.word {
+    display: inline-block;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1365px) {
+    .heading {
+        font-size: 2rem;
+    }
+
+    .intro {
+        width: 260px;
+    }
+
+    .text {
+        font-size: 1rem;
+    }
+}

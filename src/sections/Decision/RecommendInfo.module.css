@@ -1,0 +1,40 @@
+.recommend {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.recommendText {
+    align-items: center;
+    display: flex;
+    min-height: 36px;
+    padding-left: 8px;
+    width: 100%;
+}
+
+.recommendLabel {
+    padding-right: 10px;
+    text-transform: uppercase;
+}
+
+.modelContainer {
+    display: inline-block;
+    margin-left: 4px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.ribbon {
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.modelName {
+    background: #000;
+    color: #fff;
+    display: block;
+    height: 28px;
+    padding: 8px 10px 6px;
+}
