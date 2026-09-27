@@ -43,6 +43,7 @@ for (const campaign of campaigns) {
     const read = (locale: string, file: string) => fs.readFileSync(path.join(campaignRoot, locale, file), 'utf8');
     const publicMedia = path.join(import.meta.dirname, '../../public/media');
     const mediaExists = (file: string) => fs.existsSync(path.join(publicMedia, file));
+    const stagingMissing = !fs.existsSync(publicMedia);
 
     for (const locale of locales) {
         for (const file of pagesOf(locale)) {
@@ -63,7 +64,7 @@ for (const campaign of campaigns) {
                 }
             });
 
-            test(`${campaign}/${locale}/${file} names only media that exists`, () => {
+            test(`${campaign}/${locale}/${file} names only media that exists`, { skip: stagingMissing }, () => {
                 for (const media of mediaOf(source)) {
                     assert.ok(mediaExists(media), media);
                 }
@@ -87,13 +88,13 @@ for (const campaign of campaigns) {
         });
     }
 
-    test(`${campaign} site background exists in both orientations`, () => {
+    test(`${campaign} site background exists in both orientations`, { skip: stagingMissing }, () => {
         for (const media of [config.background.landscape, config.background.portrait]) {
             assert.ok(mediaExists(media), media);
         }
     });
 
-    test(`${campaign} media manifest lists only files that exist`, () => {
+    test(`${campaign} media manifest lists only files that exist`, { skip: stagingMissing }, () => {
         const manifest = JSON.parse(fs.readFileSync(path.join(campaignRoot, 'media.manifest.json'), 'utf8')) as Record<string, string[]>;
 
         for (const [folder, names] of Object.entries(manifest)) {

@@ -24,7 +24,7 @@ Each section does one job, and a new campaign fills the same slots in the same o
 | `Decision` | Which option fits you | questions whose answers `campaigns/<name>/recommendation.ts` maps to one of three options |
 | `Technical` | The three options | a 36-frame turntable per option and `<QuickFact>` rows |
 | `Features` | What each option offers | card grids of `<Feature image models video>`, filtered by the option chosen |
-| `Media` | Spread the word | twelve gallery photos, their download zip and share links |
+| `Media` | Spread the word | twelve gallery photos and share links |
 
 The "models" in code are the three options the quiz chooses between: excavators in 2018, the ways to take part now.
 Choose three options a visitor could genuinely be recommended between; the quiz and the card filter only make sense
@@ -55,7 +55,7 @@ then. `roadshow.mdx` is optional: without it the Register button and contact mod
    is used as text on black, so it needs 4.5:1 against black. The footer's social sprite
    (`public/footer/social-icons.png`) has Facebook, Google+, LinkedIn, Twitter and YouTube only.
 5. **Media.** Encode to the same slots (feature stills 1200×675 WebP, gallery previews 1280×720 and thumbnails
-   400×225 WebP with full-size JPEGs and their zip, 36 turntable frames of 1024×768 per option, the background pair
+   400×225 WebP with full-size JPEGs, 36 turntable frames of 1024×768 per option, the background pair
    and `social.jpg` — the command is in the Content section of `CLAUDE.md`). Pixabay stock goes through
    `scripts/pixabay.mjs`, which names gallery files after its subject and writes the credits to `CREDITS.MD`; client
    photography is encoded by hand and credited there. Then `node scripts/media-manifest.mjs <name>` writes the

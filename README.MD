@@ -11,9 +11,9 @@ Accessibility sections before your first change.
 | Tool                                                                 | Needed for                                                                                            |
 |----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
 | Node 24                                                              | Everything. `.nvmrc` names it and nothing enforces it, so run `nvm use`                               |
-| Git LFS                                                              | Every image, video and font. Without it a checkout holds pointer files and the page has no pictures   |
+| Git LFS                                                              | The favicon and footer sprite. Campaign media is local-only under `public/media`, published to the bucket |
 | Google Chrome                                                        | `npm run a11y`, which drives the installed Chrome                                                     |
-| ffmpeg with `libsvtav1`, `libx264` and `libwebp`, `zip`, ImageMagick | Only to regenerate media with the scripts in `scripts/`                                               |
+| ffmpeg with `libsvtav1`, `libx264` and `libwebp`, ImageMagick | Only to regenerate media with the scripts in `scripts/`                                               |
 | `PIXABAY_KEY`                                                        | Only for `scripts/pixabay.mjs`; a free key from [pixabay.com/api/docs](https://pixabay.com/api/docs/) |
 
 ## First run
@@ -87,7 +87,7 @@ role:
 - **Add a section.** Make `src/sections/<Tag>/`, register the tag in `src/mdx-components.tsx`, and give it `id` and
   `menu` in the MDX; the side menu lists it from those two props.
 - **Add or replace a photo.** Add its Pixabay id to `scripts/pixabay.json` and run
-  `PIXABAY_KEY=… node scripts/pixabay.mjs`. The script downloads it, writes WebP, rebuilds the gallery zip and
+  `PIXABAY_KEY=… node scripts/pixabay.mjs`. The script downloads it, writes WebP and
   regenerates the credits table in `CREDITS.MD`. Never copy a picture in by hand.
 - **Re-encode a video.** `scripts/hero-video.sh <master>` writes the hero's AV1 and H.264 encodes, posters and stills;
   `scripts/raising-video.sh <source>` writes the Raising clip and its still.
@@ -128,7 +128,7 @@ terraform output outrun_required_dns
 
 ## Troubleshooting
 
-- **No pictures, or 130-byte files under `public/media`.** Git LFS was missing at clone time: `git lfs install && git lfs pull`.
+- **No pictures under `public/media`.** A fresh clone has none: the staging tree is local-only. Fetch what the bucket holds with `gcloud storage cp -r gs://firebase-cloud-491613-outrun-media/v1/ public/media`, or regenerate with the media scripts.
 - **`npm start` finds port 3010 taken.** An older dev or start server is still running; `lsof -i :3010` finds it.
 - **The build warns `Failed to find font override values for font Momo Trust Display`.** Expected: Next has no metrics
   for the face, so there is no size-matched fallback.

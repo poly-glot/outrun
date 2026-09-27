@@ -17,13 +17,11 @@ const arrow = (
 
 interface MediaSectionProps {
     children: ReactNode;
-    downloadAll: string;
-    downloadAllText: string;
     downloadText: string;
     gallery: GalleryImage[];
 }
 
-export function MediaSection({ children, downloadAll, downloadAllText, downloadText, gallery }: MediaSectionProps) {
+export function MediaSection({ children, downloadText, gallery }: MediaSectionProps) {
     const track = useRef<HTMLDivElement>(null);
     const [active, setActive] = useState(0);
     const strings = useStrings();
@@ -76,7 +74,6 @@ export function MediaSection({ children, downloadAll, downloadAllText, downloadT
                     <a className={cx('btn', 'btn-primary', styles.downloadButton)} href={current?.full} download>
                         <span>{downloadText}</span>
                     </a>
-                    <a className={styles.downloadAll} href={downloadAll} download>{downloadAllText}</a>
                     <ShareLinks image={current?.large} className={styles.share} />
                 </div>
             </div>

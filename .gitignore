@@ -11,3 +11,5 @@ tsconfig.tsbuildinfo
 firebase-debug.log
 npm-debug.log*
 .idea/
+
+/public/media/

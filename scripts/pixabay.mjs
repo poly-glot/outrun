@@ -89,7 +89,6 @@ for (const { crop, folder, frames, id, seconds, start, use } of manifest.turntab
     rmSync(clip);
     credit(use, `${folder}/frame-*.webp`, video);
 }
-execFileSync('zip', ['-j', '-q', '-X', `${media}/gallery/gallery.zip`, ...readdirSync(`${media}/gallery/full`).map((name) => `${media}/gallery/full/${name}`)]);
 
 for (const { id, use } of manifest.videos) {
     const video = await hit('videos/', id);
