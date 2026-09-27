@@ -1,11 +1,10 @@
 'use client';
 
-import { social } from '@content/site.config';
 import { ExternalLink } from '@/components/ExternalLink/ExternalLink';
 import { useBrowserValue } from '@/lib/browserStore';
 import { cx } from '@/lib/cx';
 import { fill } from '@/lib/strings';
-import { useStrings } from '@/state/store';
+import { useSiteState, useStrings } from '@/state/store';
 import styles from './ShareLinks.module.css';
 
 interface ShareLinksProps {
@@ -18,10 +17,11 @@ export function ShareLinks({ className, image, text }: ShareLinksProps) {
     const origin = useBrowserValue(() => window.location.origin, '');
     const pageTitle = useBrowserValue(() => document.title, '');
     const strings = useStrings();
+    const { shareImage } = useSiteState();
 
     const url = encodeURIComponent(origin || '/');
     const title = encodeURIComponent((text || pageTitle).slice(0, 139));
-    const media = encodeURIComponent(origin + (image ?? social.image));
+    const media = encodeURIComponent(origin + (image ?? shareImage));
 
     return (
         <div className={cx(styles.share, className)}>

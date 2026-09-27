@@ -1,18 +1,20 @@
 'use client';
 
 import { createContext, useContext, useReducer, type ReactNode } from 'react';
+import { campaigns, type Answers } from '@campaigns';
 import type { SiteStrings } from '@/mdx/pages';
-import { recommendModel, type Answers } from '@/rules/recommendation';
 
 type ModalState = { type: '' } | { type: 'contact' } | { type: 'youtube'; title: string; videoId: string };
 
 interface SiteState {
     answers: Answers;
+    campaign: string;
     menuOpen: boolean;
     modal: ModalState;
     motionPaused: boolean;
     recommendedModel: string;
     selectedModel: string;
+    shareImage: string;
 }
 
 type Action =
@@ -43,7 +45,13 @@ function reduce(state: SiteState, action: Action): SiteState {
             return { ...state, selectedModel: action.model };
         case 'answer': {
             const answers = { ...state.answers, [action.questionId]: action.optionId };
-            const recommendedModel = recommendModel(answers);
+            const recommend = campaigns[state.campaign]?.recommendModel;
+
+            if (!recommend) {
+                return { ...state, answers };
+            }
+
+            const recommendedModel = recommend(answers);
 
             return { ...state, answers, recommendedModel, selectedModel: recommendedModel };
         }
@@ -55,19 +63,23 @@ const DispatchContext = createContext<(action: Action) => void>(() => undefined)
 const StringsContext = createContext<SiteStrings | null>(null);
 
 interface SiteStateProviderProps {
+    campaign: string;
     children: ReactNode;
     initialModel: string;
+    shareImage: string;
     strings: SiteStrings;
 }
 
-export function SiteStateProvider({ children, initialModel, strings }: SiteStateProviderProps) {
+export function SiteStateProvider({ campaign, children, initialModel, shareImage, strings }: SiteStateProviderProps) {
     const [state, dispatch] = useReducer(reduce, initialModel, (selectedModel): SiteState => ({
         answers: {},
+        campaign,
         menuOpen: false,
         modal: { type: '' },
         motionPaused: false,
         recommendedModel: '',
         selectedModel,
+        shareImage,
     }));
 
     return (

@@ -1,0 +1,9 @@
+{
+  "background_color": "#000000",
+  "display": "standalone",
+  "icons": [{ "sizes": "64x64 32x32 24x24 16x16", "src": "favicon.ico", "type": "image/x-icon" }],
+  "name": "Paws & Pace",
+  "short_name": "Paws & Pace",
+  "start_url": "/pace/en",
+  "theme_color": "#4ecdc4"
+}

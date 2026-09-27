@@ -4,7 +4,7 @@ import { useEffect, useRef, type ReactNode } from 'react';
 import { AnimatePresence, m } from 'framer-motion';
 import { fill } from '@/lib/strings';
 import { useSiteDispatch, useSiteState, useStrings } from '@/state/store';
-import { HeaderBar } from '@/components/Header/Header';
+import { HeaderBar, type HeaderLogo } from '@/components/Header/Header';
 import { YouTubePlayer } from '@/components/YouTubePlayer/YouTubePlayer';
 import styles from './Modal.module.css';
 
@@ -14,7 +14,15 @@ const fade = {
     initial: { opacity: 0 },
 };
 
-export function Modal({ contact, locale }: { contact: ReactNode; locale: string }) {
+interface ModalProps {
+    brand: string;
+    contact: ReactNode;
+    homeHref: string;
+    locale: string;
+    logo: HeaderLogo;
+}
+
+export function Modal({ brand, contact, homeHref, locale, logo }: ModalProps) {
     const { modal, motionPaused } = useSiteState();
     const dispatch = useSiteDispatch();
     const strings = useStrings();
@@ -42,7 +50,7 @@ export function Modal({ contact, locale }: { contact: ReactNode; locale: string 
             aria-label={videoTitle || strings.contact}
             onClose={() => dispatch({ type: 'closeModal' })}
         >
-            <HeaderBar inverse locale={locale} />
+            <HeaderBar inverse brand={brand} homeHref={homeHref} locale={locale} logo={logo} />
             <div className={styles.scroller}>
                 <AnimatePresence>
                     {modal.type === 'contact' && contact ? (

@@ -3,12 +3,15 @@ import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 
-const sourceRoot = import.meta.dirname;
-const brandLabel = 'aria-label="Outrun Extinction"';
-const externalLinkFile = path.join('components', 'ExternalLink', 'ExternalLink.tsx');
+const sourceRoots = [import.meta.dirname, path.join(import.meta.dirname, '../campaigns')];
+const externalLinkFile = path.join('src', 'components', 'ExternalLink', 'ExternalLink.tsx');
 
 const files = (extension: string) =>
-    (fs.readdirSync(sourceRoot, { recursive: true }) as string[]).filter((file) => file.endsWith(extension)).map((file) => [file, fs.readFileSync(path.join(sourceRoot, file), 'utf8')] as const);
+    sourceRoots.flatMap((root) =>
+        (fs.readdirSync(root, { recursive: true }) as string[])
+            .filter((file) => file.endsWith(extension))
+            .map((file) => [path.join(path.basename(root), file), fs.readFileSync(path.join(root, file), 'utf8')] as const),
+    );
 
 const offending = (extension: string, pattern: RegExp, allowed: (file: string, line: string) => boolean = () => false) =>
     files(extension).flatMap(([file, source]) =>
@@ -16,7 +19,7 @@ const offending = (extension: string, pattern: RegExp, allowed: (file: string, l
     );
 
 test('every label a screen reader hears comes from the locale strings', () => {
-    assert.deepEqual(offending('.tsx', /aria-label=["']/, (_, line) => line.includes(brandLabel)), []);
+    assert.deepEqual(offending('.tsx', /aria-label=["']/), []);
 });
 
 test('a link opens a new tab only through ExternalLink, which says so', () => {

@@ -41,24 +41,29 @@ interface SiteModule {
     strings: SiteStrings;
 }
 
-export const listLocales = () =>
-    fs.readdirSync(contentRoot, { withFileTypes: true }).filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort();
+const directories = (parent: string) =>
+    fs.readdirSync(parent, { withFileTypes: true }).filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort();
 
-export const listPages = (locale: string) =>
-    fs.readdirSync(path.join(contentRoot, locale))
+export const listCampaigns = () => directories(contentRoot);
+
+export const listLocales = (campaign: string) => directories(path.join(contentRoot, campaign));
+
+export const listPages = (campaign: string, locale: string) =>
+    fs.readdirSync(path.join(contentRoot, campaign, locale))
         .filter((name) => name.endsWith('.mdx') && name !== siteFile)
         .map((name) => name.replace(/\.mdx$/, ''))
         .sort();
 
-export const pageExists = (locale: string, page: string) => fs.existsSync(path.join(contentRoot, locale, `${page}.mdx`));
+export const pageExists = (campaign: string, locale: string, page: string) =>
+    fs.existsSync(path.join(contentRoot, campaign, locale, `${page}.mdx`));
 
-export async function loadPage(locale: string, page: string): Promise<PageModule | null> {
-    if (!pageExists(locale, page)) {
+export async function loadPage(campaign: string, locale: string, page: string): Promise<PageModule | null> {
+    if (!pageExists(campaign, locale, page)) {
         return null;
     }
 
-    return (await import(`../../content/${locale}/${page}.mdx`)) as PageModule;
+    return (await import(`../../content/${campaign}/${locale}/${page}.mdx`)) as PageModule;
 }
 
-export const loadSite = async (locale: string): Promise<SiteModule> =>
-    (await import(`../../content/${locale}/site.mdx`)) as SiteModule;
+export const loadSite = async (campaign: string, locale: string): Promise<SiteModule> =>
+    (await import(`../../content/${campaign}/${locale}/site.mdx`)) as SiteModule;

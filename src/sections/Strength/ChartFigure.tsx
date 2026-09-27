@@ -42,7 +42,7 @@ export function ChartFigure({ children, delay, value }: ChartFigureProps) {
                     <m.path
                         d={circlePath}
                         fill="none"
-                        stroke="#FDC529"
+                        stroke="var(--chart-stroke)"
                         strokeWidth={24}
                         strokeMiterlimit={10}
                         style={{ opacity, pathLength, pathOffset }}

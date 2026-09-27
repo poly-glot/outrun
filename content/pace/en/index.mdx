@@ -1,0 +1,152 @@
+export const meta = {
+    title: "Paws & Pace | The monthly run for cheetahs",
+    description: "A friendly monthly 5K for the fastest animal on land. Run with Paws & Pace, bring your crew or back a runner, and keep cheetahs on the ground they need.",
+};
+
+<Hero id="home" menu="Paws & Pace" image="hero.webp" mobileImage="hero_portrait.webp" video="hero.av1.mp4, hero.h264.mp4" mobileVideo="hero_portrait.av1.mp4, hero_portrait.h264.mp4" scrollTo="join" scrollText="Scroll to lace up">
+# Paws<br />& Pace
+</Hero>
+
+<Welcome id="join" menu="Lace up" mobileImage="background_concept_portrait.webp">
+## The slowest way<br />to save the fastest
+
+**ONE SATURDAY A MONTH.<br />ONE 5K. ONE SPECIES.**
+
+A cheetah covers five kilometres in about four minutes. We take a little longer, and that's the point: a run you can actually make, every month, with the money going to the people who keep cheetahs alive. No medals cabinet required, just <More>turning up</More>, <More>bringing someone</More> or <More>backing someone</More> who does.
+
+**See you at the start line.**
+</Welcome>
+
+<Strength id="strength" menu="Why we run">
+## Why we run
+
+<Charts>
+    <Chart value={-91}>Of its range<br />already gone</Chart>
+    <Chart value={-85} delay={0.25}>Zimbabwe<br />in 16 years</Chart>
+    <Chart value={-80} delay={0.5}>Losses with a<br />guardian dog</Chart>
+</Charts>
+
+<Savings heading="The numbers">
+    <Saving icon="link" value={7100} unit="left in the wild*" sticker="just" delay={0.75} />
+    <Saving icon="keyless" value={50} unit="Asiatic cheetahs**" sticker="under" delay={1} />
+    <Saving icon="filter" value={300} unit="cubs trafficked a year***" sticker="up to" delay={1.25} />
+</Savings>
+
+<Note>\* Durant et al., PNAS 2017; the IUCN Red List (2021) counts around 6,500 mature adults \*\* All in Iran; recent counts put it nearer 30 \*\*\* Cubs taken from the Horn of Africa for the pet trade; most die within months (Cheetah Conservation Fund)</Note>
+</Strength>
+
+<Roadshow id="run" menu="The monthly 5K" theme="black" layout="normalPage" image="run.webp" mobileImage="run_portrait.webp" backgroundColor="#000" cta="Find your Saturday">
+#### Paws & Pace, every month
+
+## First Saturday,<br />nine sharp
+
+One 5K, the first Saturday of every month, in parks across the UK. No cut-off time, no qualifying, no lycra inspection. Your fiver on the line pays for the coffee van and the marshals; whatever you raise on top goes straight to the field.
+
+Click 'Find your Saturday', pick a park, and we'll hold you a spot and set up your page.
+</Roadshow>
+
+<Raising id="miles" menu="Where the money goes" theme="white" backgroundColor="#fff" video="miles.h264.mp4" mobileImage="miles.webp">
+## Where the<br />money goes
+
+Cheetahs don't need us to run faster. They need land kept open, farmers kept on side and cubs kept out of crates. Every month's takings are split across the four things that do exactly that.
+
+<Fact icon="dog">
+### Guardian dogs
+
+An Anatolian shepherd raised with the herd cuts livestock losses by 80% or more. When the goats stop dying, the cheetahs stop being shot. One dog protects one farm for a decade.
+</Fact>
+
+<Fact icon="collar">
+### GPS collars
+
+A collar turns a rumour into a route. It shows which farms a cheetah crosses, where she raises her cubs and where the next corridor has to be, so land is protected where cheetahs actually go.
+</Fact>
+
+<Fact icon="scout">
+### Community scouts
+
+Local people, trained and paid, who count cheetahs, settle disputes over lost goats and raise the alarm when a cub goes missing. 77% of cheetah range lies outside any park. The scouts are the park.
+</Fact>
+
+<Fact icon="cub">
+### The cub safe house
+
+Cubs seized from traffickers arrive dehydrated and days from death. The safe house in Somaliland gives them vets, milk and a future, and has taken in more than a hundred since 2011.
+</Fact>
+</Raising>
+
+<Decision id="decision" menu="Find your fit" theme="white" layout="normalPage" backgroundColor="#fff" recommendLabel="We recommend" defaultLabel="Your fit">
+## Find your fit
+
+*Three quick questions and we'll tell you whether you're a runner, a ringleader or a backer this month. Or skip them and choose below.*
+
+<Question id="saturday" text="What's your first Saturday looking like?">
+    <Option id="free">Free, and I fancy a run</Option>
+    <Option id="cheer">Free, but I'd rather cheer</Option>
+    <Option id="busy">Spoken for, sadly</Option>
+</Question>
+
+<Question id="crew" text="Who's in?">
+    <Option id="me">Just me</Option>
+    <Option id="us">Me and my lot</Option>
+</Question>
+
+<Question id="give" text="What are you giving this month?">
+    <Option id="legs">My legs</Option>
+    <Option id="wallet">My wallet</Option>
+    <Option id="both">Both, why not</Option>
+</Question>
+</Decision>
+
+<Technical id="ways" menu="Three fits" layout="normalPage" factsHeading="At a glance" defaultLabel="In pictures">
+<ModelText model="Stride">
+Stride is the plain one: you, one 5K a month, your own pace and a page with your name on it. Turn up when you can, skip when you can't, and watch your year's total add up one Saturday at a time.
+</ModelText>
+
+<ModelText model="Pack">
+Pack is Stride with company: three or more of you under one name, one shared total and one unofficial rivalry. Workmates, families, book clubs that have stopped pretending to read. Kids run free with a grown-up alongside.
+</ModelText>
+
+<ModelText model="Patron">
+Patron is for the ones in the deckchairs. Back a runner or a pack, give monthly or take a marshal shift, and get a field update every quarter showing what your money did. The loudest people on the course have never run a step.
+</ModelText>
+
+<QuickFact icon="icons/distance.png" label="Distance" values={{"Stride":"5K","Pack":"5K, kids run free","Patron":"The walk to the course"}} />
+<QuickFact icon="icons/time.png" label="Time" values={{"Stride":"One Saturday morning","Pack":"One Saturday, together","Patron":"Five minutes a month"}} />
+<QuickFact icon="icons/entry.png" label="Entry" values={{"Stride":"£5 a run","Pack":"£4 each, three or more","Patron":"From £3 a month"}} />
+<QuickFact icon="icons/goes-to.png" label="It goes to" values={{"Stride":"Collars and tracking","Pack":"Guardian dogs on farms","Patron":"The cub safe house"}} />
+</Technical>
+
+<Features id="day" menu="On the morning" theme="black" layout="normalPage" backgroundColor="#505050">
+## On the<br />morning
+
+<Feature image="features/day/5k.webp" models="Stride, Pack">
+### The 5K
+
+One friendly lap, timed if you want it, ignored if you don't. Walkers welcome. Prams welcome. Dogs on leads extremely welcome.
+</Feature>
+
+<Feature image="features/day/race-the-cheetah.webp" models="Stride, Pack, Patron">
+### Race the cheetah
+
+A hundred metres against a strip of light doing sixty miles an hour. Nobody wins. Everyone has a go.
+</Feature>
+
+<Feature image="features/day/guardian-line.webp" models="Patron">
+### The Patron post
+
+The loudest corner of the park, staffed by Patrons with flasks and opinions. Take a marshal shift and we'll send the hi-vis.
+</Feature>
+
+<Feature image="features/day/finish.webp" models="Stride, Pack, Patron">
+### The finish
+
+A stamp on your card, a photo if you want one, and a live total on a whiteboard that climbs every time someone crosses.
+</Feature>
+</Features>
+
+<Media id="media" menu="Spread the word" layout="normalPage" backgroundColor="#191919" folder="gallery" downloadText="Download high resolution" downloadAll="gallery/gallery.zip" downloadAllText="+ Download all">
+## Spread the word
+
+Download the stills, share the dates and tag #PawsAndPace. Every share is another pair of feet in the park next month.
+</Media>

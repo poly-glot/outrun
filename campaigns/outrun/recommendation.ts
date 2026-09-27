@@ -1,4 +1,4 @@
-export type Answers = Record<string, string>;
+import type { Answers } from '../index.ts';
 
 const wouldRatherBack = (answers: Answers) =>
     answers.running === 'no' || answers.give === 'money' || answers.time === 'minutes';

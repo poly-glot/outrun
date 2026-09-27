@@ -21,7 +21,15 @@
         ],
         "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
         "public": "out",
-        "redirects": [{ "destination": "/en", "source": "/", "type": 302 }],
+        "redirects": [
+            { "destination": "/outrun/en", "source": "/", "type": 302 },
+            { "destination": "/outrun/en", "source": "/outrun", "type": 302 },
+            { "destination": "/pace/en", "source": "/pace", "type": 302 },
+            { "destination": "/outrun/en", "source": "/en", "type": 301 },
+            { "destination": "/outrun/de", "source": "/de", "type": 301 },
+            { "destination": "/outrun/en/:page*", "source": "/en/:page*", "type": 301 },
+            { "destination": "/outrun/de/:page*", "source": "/de/:page*", "type": 301 }
+        ],
         "site": "outrun",
         "trailingSlash": false
     }

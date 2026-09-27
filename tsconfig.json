@@ -18,6 +18,9 @@
       "@/*": [
         "./src/*"
       ],
+      "@campaigns": [
+        "./campaigns/index.ts"
+      ],
       "@content/*": [
         "./content/*"
       ]
@@ -37,6 +40,8 @@
   ],
   "include": [
     "next-env.d.ts",
+    "campaigns/**/*.ts",
+    "campaigns/**/*.tsx",
     "src/**/*.ts",
     "src/**/*.tsx",
     "content/**/*.ts",

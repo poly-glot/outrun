@@ -1,16 +1,22 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { mediaRoot } from '@content/site.config';
+import { campaignConfig, currentCampaign } from './campaign';
 
-const publicMedia = path.join(process.cwd(), 'public', mediaRoot);
+const mediaManifest = (): Record<string, string[]> =>
+    JSON.parse(fs.readFileSync(path.join(process.cwd(), 'content', currentCampaign(), 'media.manifest.json'), 'utf8')) as Record<string, string[]>;
 
 export const mediaUrl = (file: string) =>
-    [mediaRoot, ...file.split('/').map((segment) => encodeURIComponent(segment))].join('/');
+    [campaignConfig().mediaBase, ...file.split('/').map((segment) => encodeURIComponent(segment))].join('/');
 
-const imageFiles = (folder: string) =>
-    fs.readdirSync(path.join(publicMedia, folder)).filter((name) => /\.(jpe?g|webp)$/i.test(name)).sort();
+function imageFiles(folder: string) {
+    const names = mediaManifest()[folder];
 
-export const listFrames = (folder: string) => imageFiles(folder).map((name) => mediaUrl(`${folder}/${name}`));
+    if (!names) {
+        throw new Error(`${currentCampaign()} media.manifest.json lists no folder ${folder}; rerun scripts/media-manifest.mjs`);
+    }
+
+    return names;
+}
 
 const webpOf = (name: string) => name.replace(/\.jpe?g$/i, '.webp');
 
@@ -19,6 +25,8 @@ export interface GalleryImage {
     large: string;
     thumbnail: string;
 }
+
+export const listFrames = (folder: string) => imageFiles(folder).map((name) => mediaUrl(`${folder}/${name}`));
 
 export const listGallery = (folder: string): GalleryImage[] =>
     imageFiles(`${folder}/full`).map((name) => ({

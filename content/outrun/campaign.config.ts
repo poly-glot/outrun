@@ -1,6 +1,12 @@
+export const brand = 'Outrun Extinction';
+
 export const siteUrl = 'https://outrun.junaid.guru';
 
-export const mediaRoot = '/media';
+export const defaultLocale = 'en';
+
+export const mediaBase = '/media';
+
+export const logo = { kind: 'component' } as const;
 
 export const background = {
     landscape: 'background_concept.webp',
@@ -8,7 +14,7 @@ export const background = {
 };
 
 export const social = {
-    image: `${mediaRoot}/social.jpg`,
+    image: 'social.jpg',
 };
 
 export const models = [

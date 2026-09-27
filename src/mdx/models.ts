@@ -1,4 +1,4 @@
-import { models } from '@content/site.config';
+import { campaignConfig } from './campaign';
 import { listFrames } from './media';
 
 export interface ModelCatalogue {
@@ -7,6 +7,6 @@ export interface ModelCatalogue {
 }
 
 export const modelCatalogue = (): ModelCatalogue => ({
-    frames: Object.fromEntries(models.map((model) => [model.id, listFrames(model.frames)])),
-    ids: models.map((model) => model.id),
+    frames: Object.fromEntries(campaignConfig().models.map((model) => [model.id, listFrames(model.frames)])),
+    ids: campaignConfig().models.map((model) => model.id),
 });

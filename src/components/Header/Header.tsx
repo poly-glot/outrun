@@ -1,10 +1,15 @@
 'use client';
 
+import type { ComponentType } from 'react';
 import { useSiteDispatch, useSiteState, useStrings } from '@/state/store';
 import { cx } from '@/lib/cx';
 import { storeMotionPreference } from '@/lib/motion';
-import { CheetahLogo } from './CheetahLogo';
 import styles from './Header.module.css';
+
+export type HeaderLogo =
+    | { Component: ComponentType<{ className?: string }>; kind: 'component' }
+    | { kind: 'image'; src: string }
+    | { kind: 'svg'; markup: string };
 
 interface LocaleLink {
     code: string;
@@ -12,12 +17,17 @@ interface LocaleLink {
 }
 
 interface HeaderProps {
+    brand: string;
     hasContact: boolean;
+    homeHref: string;
     locale: string;
     locales: LocaleLink[];
+    logo: HeaderLogo;
 }
 
-type HeaderBarProps = ({ inverse?: false } & HeaderProps) | { inverse: true; locale: string };
+type HeaderBarProps =
+    | ({ inverse?: false } & HeaderProps)
+    | ({ inverse: true } & Pick<HeaderProps, 'brand' | 'homeHref' | 'locale' | 'logo'>);
 
 function LocaleSwitcher({ locale, locales }: Pick<HeaderProps, 'locale' | 'locales'>) {
     const strings = useStrings();
@@ -42,6 +52,18 @@ function LocaleSwitcher({ locale, locales }: Pick<HeaderProps, 'locale' | 'local
             ))}
         </nav>
     );
+}
+
+function Logo({ logo }: { logo: HeaderLogo }) {
+    if (logo.kind === 'component') {
+        return <logo.Component className={styles.logoSvg} />;
+    }
+
+    if (logo.kind === 'image') {
+        return <img alt="" className={styles.logoSvg} src={logo.src} />;
+    }
+
+    return <span className={styles.logoSvg} dangerouslySetInnerHTML={{ __html: logo.markup }} />;
 }
 
 export function HeaderBar(props: HeaderBarProps) {
@@ -76,8 +98,8 @@ export function HeaderBar(props: HeaderBarProps) {
             </div>
 
             <div className={styles.panelCenter}>
-                <a href={`/${props.locale}#home`} className={styles.logo} aria-label="Outrun Extinction">
-                    <CheetahLogo className={styles.logoSvg} />
+                <a href={props.homeHref} className={styles.logo} aria-label={props.brand}>
+                    <Logo logo={props.logo} />
                 </a>
             </div>
 

@@ -1,20 +1,25 @@
-# Outrun Extinction: campaign site
+# Outrun Extinction: multi-campaign site
 
-The campaign page for Outrun Extinction, a UK run series for cheetah conservation, rebuilt from the 2018 Cat
-excavator site. One statically exported site: Next.js 16 App Router, React 19, TypeScript strict, CSS Modules, `framer-motion`
+The campaign platform that began as the Outrun Extinction page, a UK run series for cheetah conservation, rebuilt from
+the 2018 Cat excavator site. One statically exported build hosts every campaign: each URL is
+`/<campaign>/<locale>[/<page>]`, a campaign is `content/<campaign>/` (copy, config, media manifest) plus an optional
+`campaigns/<campaign>/` (the code it may own: a logo component, a `next/font` face, quiz rules, a `theme.css` of token
+overrides scoped by `[data-campaign]`), registered in `src/mdx/campaign.ts` (config) and `campaigns/index.ts` (code).
+`outrun` is the founding campaign; `pace` (Paws & Pace) proves the machinery with one locale, an inline-SVG logo and
+its own brand tokens. Next.js 16 App Router, React 19, TypeScript strict, CSS Modules, `framer-motion`
 for every animation, and MDX for every page. `npm run dev` serves it on port 3010 (3000 is taken by another
 project's container on the dev machine); `npm run build` exports it to `out/` (`output: 'export'`), and `npm start`
 serves `out/` on the same port with clean URLs, as Firebase Hosting does in production at `https://outrun.junaid.guru`
 (`firebase.json`, site `outrun`, deployed by `.github/workflows/deploy.yml`). A static export has no image optimizer,
 so `images.unoptimized` is set and every picture is already WebP at the size the page shows. `agentRules: false` stops
 `next dev` appending its managed agent block to this file whenever it detects an AI agent. Node 24 (`.nvmrc`). The
-site reads no environment variables: the canonical URL is `siteUrl` in `content/site.config.ts`, and there is no
+site reads no environment variables: the canonical URL is `siteUrl` in each `content/<campaign>/campaign.config.ts`, and there is no
 analytics and no cookie; analytics returns only behind an Accept and Decline choice with a cookie policy page.
 A change is checked by opening the page in Chrome and by `npm run check`, and it is not done until
 `npm run check` is green, `npm run a11y` passes (no serious or critical axe violation, every journey ok), and the five-minute manual
 script has been run: Tab through the header, open and close the menu and the dialog by keyboard, read the Strength
 section with VoiceOver from the top of the page, check the German labels. The accessibility owner is the site owner,
-Junaid Ahmed, and the published statement is `/<locale>/accessibility`.
+Junaid Ahmed, and the published statement is `/<campaign>/<locale>/accessibility`.
 
 ## Commands
 
@@ -24,17 +29,22 @@ Junaid Ahmed, and the published statement is `/<locale>/accessibility`.
 | `npm run check` | `typecheck`, `lint`, `test`, in that order; the gate |
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | `eslint .`, including the import-direction rules below |
-| `npm test` | `node --test` over `src/**/*.test.ts`, no framework |
+| `npm test` | `node --test` over `src/**/*.test.ts` and `campaigns/**/*.test.ts`, no framework |
 | `npm run build` / `npm start` | Static export to `out/`, then `serve` over it on 3010 with clean URLs, as Firebase serves it |
 | `npm run a11y` | Against a running server (`A11Y_URL`, default `http://localhost:3010`): `scripts/a11y.mjs` runs axe over every page at desktop and phone width, then drives the keyboard journeys and measurements listed under _Accessibility_; the CI step and part of the definition of done |
 
 ## Content
 
-Every page is an MDX file under `content/<locale>/`, compiled by `@next/mdx`, and every URL is a
-file: `content/en/index.mdx` is `/en`, `content/en/roadshow.mdx` is `/en/roadshow`, and a new folder
-`content/fr/` lights up `/fr` with no code change beyond listing its pages in `PAGES` in `scripts/a11y.mjs`. `/`
-redirects to `/en` in `firebase.json`. `content/site.config.ts` holds the non-copy data: the site URL, the models and
-their 360 frame folders, the site background and the social meta. The site background is the campaign still
+Every page is an MDX file under `content/<campaign>/<locale>/`, compiled by `@next/mdx`, and every URL is a
+file: `content/outrun/en/index.mdx` is `/outrun/en`, `content/outrun/en/roadshow.mdx` is `/outrun/en/roadshow`, and a
+new locale folder `content/outrun/fr/` lights up `/outrun/fr` with no code change: routes, hreflang alternates and the
+a11y page list are all walked from the content tree, and a campaign with one locale simply hides the switcher. A new
+campaign is a `content/<name>/` folder plus its entries in `src/mdx/campaign.ts` and `campaigns/index.ts`, which fails
+the build loudly when either is missing. `/`, `/<campaign>` and the pre-campaign `/en` and `/de` URLs all redirect in
+`firebase.json`. `content/<campaign>/campaign.config.ts` holds the campaign's non-copy data, with no runtime imports:
+the brand name (the logo link's accessible name), site URL, default locale, `mediaBase`, the logo (`component` from
+the registry, inline `svg` markup, or an `image` URL), the models and their 360 frame folders, the site background and
+the social meta. The site background is the campaign still
 `background_concept.webp` (the supplied cheetah image mirrored so the cheetah sits right of the copy facing it, at 2560
 wide) and `background_concept_portrait.webp`, the square crop from the source's left edge mirrored the same way, which
 keeps the cheetah in the phone and tablet slots. `social.jpg`, the share card, is the same background at
@@ -42,7 +52,7 @@ keeps the cheetah in the phone and tablet slots. `social.jpg`, the share card, i
 the full width so the cheetah on the right stays in, with the trim taken from the sky. A page exports one `meta` object (its
 title and description); everything else in the file is Markdown with components, never frontmatter.
 
-`content/<locale>/site.mdx` is the locale's shell: an exported `strings` object (every label,
+`content/<campaign>/<locale>/site.mdx` is the locale's shell: an exported `strings` object (every label,
 hint and status string a component renders) and the `<Footer>` as Markdown lists. The page
 template loads it beside the page, and loads `roadshow.mdx` into the contact modal when it exists.
 
@@ -77,9 +87,15 @@ are fine), a YouTube id for a feature video, a list of hero encodes, a folder to
 A component that needs its Markdown as data (words to scrub, options to answer, links to lay out)
 reads it on the server from the element tree with the helpers in `src/mdx/nodes.ts` (`ofType`,
 `textOf`, `linesOf`), and hands plain data to the client section. Folder listings (`listFrames`,
-`listGallery`) and `mediaUrl`, which encodes each path segment so a file name with spaces or colons is still a valid
-URL, live in `src/mdx/media.ts` and run at build time only. `listGallery` lists the full-size JPEG downloads and
-pairs each with its WebP preview and thumbnail.
+`listGallery`) and `mediaUrl`, which prefixes the campaign's `mediaBase` and encodes each path segment so a file name
+with spaces or colons is still a valid URL, live in `src/mdx/media.ts` and run at build time only. They read the
+campaign's checked-in `content/<campaign>/media.manifest.json`, regenerated by `node scripts/media-manifest.mjs
+<campaign>`, never the filesystem or a bucket listing, so the build is deterministic and `mediaBase` can point at a
+storage bucket without touching code; a test verifies every manifest entry exists under `public/media`. `listGallery`
+lists the full-size JPEG downloads and pairs each with its WebP preview and thumbnail. The section tags run without
+route params, so the current campaign is request-scoped: layout, page and `generateMetadata` call `setCampaign` and
+`media.ts`/`models.ts` read it through a React `cache()` holder in `src/mdx/campaign.ts`, which stays correct while
+static pages generate in parallel where a module-level variable would bleed between interleaved renders.
 
 ## Layout
 
@@ -88,12 +104,12 @@ same base name (`Header.tsx`, `Header.module.css`; a test is `Name.test.ts`).
 
 | Directory | Owns |
 | --- | --- |
-| `content/` | The site's copy, one folder per locale, plus `site.config.ts` and `icons.ts` (inline SVG by name; each icon's ids carry the icon name as a prefix, from svgo's `cleanupIds` and `prefixIds`, because several icons are inlined on one page and a shared id would let one icon's mask clip another's, so a new icon goes through the same two plugins). Never imports code. Photos and clips are Pixabay assets listed by id in `scripts/pixabay.json`; `PIXABAY_KEY=... node scripts/pixabay.mjs` downloads them, derives the stills (feature cards at 1200×675), the gallery sizes and zip and the three turntable frame sets cut from clips, all WebP but the gallery's full-size downloads, and regenerates the credits table in `README.MD`, so an asset is added to the manifest, never copied in by hand; it finds the table by its header row, padded or not, and replaces nothing else, so the heading and the prose around it are free to change, and it stops before downloading anything when the table is missing. |
-| `src/app/` | The composition root: `[locale]/layout.tsx` (html lang, fonts, the state provider), `[locale]/[[...slug]]/page.tsx` (loads the page and the shell MDX, derives the menu, renders header, content, rail, footer and modal), `fonts.ts` and `fonts/`, `tokens.css` (the `:root` design tokens, the reset, `.btn` and the few global utilities, all inside `@layer base` so a CSS Module always wins whatever order the production chunks load in), the only place a global selector may live. |
-| `src/mdx-components.tsx`, `src/mdx/` | How `content/` becomes React. `mdx-components.tsx` registers every authoring tag from `src/sections/`. `mdx/` is the build-time loaders and readers, no copy and no UI: `pages.ts` (list and load MDX modules), `nodes.ts` (element-tree readers and `collectSections`), `media.ts` (`mediaUrl`, `listFrames`, `listGallery`), `models.ts` (the model catalogue with its frame lists), `mdx.d.ts` (the shape of a `*.mdx` module). Imports nothing from the UI. |
-| `src/components/<Name>/` | One component per folder, `Name.tsx` and `Name.module.css`. `Section` wraps every section and exports `SectionProps`, the props every section tag shares and spreads into it: it registers the section's scroll progress and exposes it through `useSectionProgress`. `SkipLink` is the hidden "skip to content" anchor, shown on focus, targeting `<main id="content">`. `BackgroundImage` is the one art-directed image (`<picture>` over `getImageProps`, portrait below 980px); `FixedBackground` is the site-wide fixed one. `Header` (with `CheetahLogo`, the campaign gallop traced from the cheetah clip as seventeen silhouette frames in a 134×60 box with integer coordinates, laid out as a strip that `motion` slides one frame per 8px of scroll travel in either direction so the cheetah only ever runs forward, through a playhead capped at 24 frames a second that never trails the scroll by more than one stride, so a flick makes it sprint for a beat rather than strobe, the motion control, a play/pause button whose label is the action it offers so it needs no pressed state, and the language switcher, a `<nav>` of `hreflang` links to the locales that have the current page, the current one marked `aria-current="page"` (links rather than a `<select>`, whose arrow keys would navigate on every change on Windows and Linux); the head carries the matching `hreflang` alternates; `HeaderBar inverse` is the same bar in yellow with Close in place of Register, rendered inside the modal), `SideMenu` (the rail with one progress ring per section; its yellow overlay rests on the panel's 300px edge, slides in from off-screen on the panel's own 240ms curve and sits one layer below the panel in both states, so its visible edge is always the panel's edge while opening and closing; Escape and its native anchors both move focus, to the first link on open and the Menu button on close), `Modal` (a native `<dialog>` opened with `showModal()`, so focus moves in and back, the page goes inert and Escape closes it; its `close` event dispatches `closeModal`, so state follows however it closed) are the shell. `YouTubePlayer` is the one YouTube embed, a plain `<iframe>` mounted only while the modal shows a feature video, playing from the privacy-enhanced `youtube-nocookie.com` host, which stores nothing until a video plays; the IFrame API it replaced only created and destroyed the player, which mounting and unmounting the iframe already does. `View360` is the drag-and-slider turntable: its preloaded frames stack in one grid cell with only the active frame visible (its range input carries `autoComplete="off"` and `suppressHydrationWarning` because its disabled state and value are client state that a browser can restore on reload before React hydrates, which showed up as a hydration mismatch on `disabled`); `Flip` and `Reveal` the two transitions; `RichText`, `Loading`, `ScrollIndicator`, `ShareLinks` the rest; `MotionFeatures` wraps the page in `LazyMotion` (`strict`, `domAnimation`), the one feature set the `m.*` elements need: `initial`, `animate`, `exit`, `whileInView`, variants and `AnimatePresence`. `BodyState` mirrors the store onto `<body>` (`data-locked`, `data-menu-open`, `data-motion-paused`) and the `motionPaused` motion value, and follows the motion preference `lib/motion` resolves: the OS reduced-motion setting, live, unless a header choice made under that same setting is stored. A component may read `state/` and `lib/`; it never imports `app/` or a section. |
+| `content/` | The campaigns' copy and data, one folder per campaign holding one folder per locale plus `campaign.config.ts` and `media.manifest.json`, and the shared `icons.ts` (inline SVG by name; each icon's ids carry the icon name as a prefix, from svgo's `cleanupIds` and `prefixIds`, because several icons are inlined on one page and a shared id would let one icon's mask clip another's, so a new icon goes through the same two plugins). Never imports code. Photos and clips are Pixabay assets listed by id in `scripts/pixabay.json`; `PIXABAY_KEY=... node scripts/pixabay.mjs` downloads them, derives the stills (feature cards at 1200×675), the gallery sizes and zip and the three turntable frame sets cut from clips, all WebP but the gallery's full-size downloads, and regenerates the credits table in `CREDITS.MD` (linked from the README), so an asset is added to the manifest, never copied in by hand; it finds the table by its header row, padded or not, and replaces nothing else, and it stops before downloading anything when the table is missing. |
+| `campaigns/<campaign>/` | The code one campaign may own, reached only through the registry `campaigns/index.ts`: a logo component (`outrun/Logo.tsx` is the cheetah gallop), a `next/font` face exporting the `--font-heading` variable, `recommendation.ts` mapping that campaign's quiz answers to a model with its table-driven test beside it, and a `theme.css` overriding design tokens under `[data-campaign='<campaign>']`. May import `src/components`, `src/lib`, `src/state`; never `src/app` or a section. |
+| `src/app/` | The composition root: `[campaign]/[locale]/layout.tsx` (html lang, `data-campaign`, the campaign's font class, the state provider), `[campaign]/[locale]/[[...slug]]/page.tsx` (sets the request's campaign, loads the page and the shell MDX, derives the menu, renders header, content, rail, footer and modal), `tokens.css` (the `:root` design tokens, the reset, `.btn` and the few global utilities, all inside `@layer base` so a CSS Module always wins whatever order the production chunks load in), the only place a global selector may live beside a campaign's `theme.css`. |
+| `src/mdx-components.tsx`, `src/mdx/` | How `content/` becomes React. `mdx-components.tsx` registers every authoring tag from `src/sections/`. `mdx/` is the build-time loaders and readers, no copy and no UI: `pages.ts` (list campaigns, locales and pages, load MDX modules), `campaign.ts` (`CampaignConfig`, the config registry and the `cache()`-scoped current campaign), `nodes.ts` (element-tree readers and `collectSections`), `media.ts` (`mediaUrl`, `listFrames`, `listGallery` over the campaign's manifest), `models.ts` (the model catalogue with its frame lists), `mdx.d.ts` (the shape of a `*.mdx` module). Imports nothing from the UI and never `@campaigns`. |
+| `src/components/<Name>/` | One component per folder, `Name.tsx` and `Name.module.css`. `Section` wraps every section and exports `SectionProps`, the props every section tag shares and spreads into it: it registers the section's scroll progress and exposes it through `useSectionProgress`. `SkipLink` is the hidden "skip to content" anchor, shown on focus, targeting `<main id="content">`. `BackgroundImage` is the one art-directed image (`<picture>` over `getImageProps`, portrait below 980px); `FixedBackground` is the site-wide fixed one. `Header` (rendering the campaign's logo — a registry component such as `campaigns/outrun/Logo.tsx`, the campaign gallop traced from the cheetah clip as seventeen silhouette frames in a 134×60 box with integer coordinates, laid out as a strip that `motion` slides one frame per 8px of scroll travel in either direction so the cheetah only ever runs forward, through a playhead capped at 24 frames a second that never trails the scroll by more than one stride, so a flick makes it sprint for a beat rather than strobe — or the config's inline SVG markup or image URL, inside a link named by the campaign's brand, the motion control, a play/pause button whose label is the action it offers so it needs no pressed state, and the language switcher, a `<nav>` of `hreflang` links to the locales that have the current page, the current one marked `aria-current="page"` (links rather than a `<select>`, whose arrow keys would navigate on every change on Windows and Linux); the head carries the matching `hreflang` alternates; `HeaderBar inverse` is the same bar in yellow with Close in place of Register, rendered inside the modal), `SideMenu` (the rail with one progress ring per section; its yellow overlay rests on the panel's 300px edge, slides in from off-screen on the panel's own 240ms curve and sits one layer below the panel in both states, so its visible edge is always the panel's edge while opening and closing; Escape and its native anchors both move focus, to the first link on open and the Menu button on close), `Modal` (a native `<dialog>` opened with `showModal()`, so focus moves in and back, the page goes inert and Escape closes it; its `close` event dispatches `closeModal`, so state follows however it closed) are the shell. `YouTubePlayer` is the one YouTube embed, a plain `<iframe>` mounted only while the modal shows a feature video, playing from the privacy-enhanced `youtube-nocookie.com` host, which stores nothing until a video plays; the IFrame API it replaced only created and destroyed the player, which mounting and unmounting the iframe already does. `View360` is the drag-and-slider turntable: its preloaded frames stack in one grid cell with only the active frame visible (its range input carries `autoComplete="off"` and `suppressHydrationWarning` because its disabled state and value are client state that a browser can restore on reload before React hydrates, which showed up as a hydration mismatch on `disabled`); `Flip` and `Reveal` the two transitions; `RichText`, `Loading`, `ScrollIndicator`, `ShareLinks` the rest; `MotionFeatures` wraps the page in `LazyMotion` (`strict`, `domAnimation`), the one feature set the `m.*` elements need: `initial`, `animate`, `exit`, `whileInView`, variants and `AnimatePresence`. `BodyState` mirrors the store onto `<body>` (`data-locked`, `data-menu-open`, `data-motion-paused`) and the `motionPaused` motion value, and follows the motion preference `lib/motion` resolves: the OS reduced-motion setting, live, unless a header choice made under that same setting is stored. A component may read `state/` and `lib/`; it never imports `app/` or a section. |
 | `src/sections/<Tag>/` | One folder per authoring tag, PascalCase, named exactly as the author writes it: `Hero`, `Welcome`, `Strength`, `Roadshow`, `Raising`, `Decision`, `Technical`, `Features`, `Media`, `Events`, `Footer`. The entry `<Tag>.tsx` is the tag, a thin server component that turns the Markdown children and props into plain data with `src/mdx/nodes.ts`, and it also holds the tag's child tags (`Fact`, `Question`, `Option`, `Feature`, `Country`, `Column`, `More`). `<Tag>Section.tsx` is the client body when the tag needs one; the rest of the folder is that section's parts, named by what they render so a part never shares a name with a tag (`Raising/` has `Intro`, `Frames`, `Connectors`, `Facts`; `Strength/` has `ChartFigure`, `SavingFigure`; `Decision/` has `QuestionRow`, `RecommendInfo`; `Technical/` has `ModelBar`, `QuickFactRow`; `Footer/` has `FooterColumn`). `ContentText.module.css` (the left text column, plus `container` and `paperOnTablet`, the section shell every full-height section composes with `cx`; `container` inherits the section's min-height so a full-height section's image and bottom rule reach its foot; from 1024px up a container holding the column is a grid with the column centred in flow, never absolutely positioned, so a section grows when the copy does, which is what keeps WCAG text spacing from overflowing it; a section never sets a min-height on it, and a band puts its floor on the in-flow copy instead) and `ModelFrame.module.css` sit at the root of the tree because more than one section shares them. A section never imports `app/`; a part two sections need (`RecommendInfo`) is imported across from its owning folder, and moves to `components/` the day a third needs it. |
-| `src/rules/` | Pure rules: `recommendation.ts` maps the quiz answers to a model, with its table-driven test beside it. No React, no state, no component. |
 | `src/state/` | `store.tsx`, the one React context (`useReducer`) for the low-frequency state: menu, modal, selected and recommended model, quiz answers. `sectionProgress.ts`, module-level `motion` values, one per section, plus the active section id, so scroll progress reaches the menu rings without a React render. |
 | `src/lib/` | Infrastructure only, no domain rule: `browserStore` (`useSyncExternalStore` over a browser value, for the origin and the title), `cx`, `scrollTo` (no `behavior` option, so `scroll-behavior` on `html` decides and the reduced-motion rules can turn it off), `usePreloaded` (preloads a frame sequence and reports when every frame has arrived), `useMediaQuery`, `useRange` (a clamped 0..1 slice of a progress value), `useScrub` (`useRange` plus the matching `y` travel, the one scroll-linked reveal), `motion` (the `motionPaused` motion value every scroll-linked hook and scrubber reads, plus the preference: `followMotionPreference` subscribes to `prefers-reduced-motion` itself rather than through `useMediaQuery`, whose hydration pass reports `false` before the real value and would expire a stored choice; a header choice is stored as `paused|playing/<reduced>` and dropped, on load or live, the moment the OS setting differs from the one it was made under, so the newer signal always wins). Never imports `app/`, `components/`, `sections/` or `state/`. |
 
@@ -159,9 +175,9 @@ shown, is announced from a short `aria-live="polite"` status line, never from a 
 (_journeys_). Toggles are `<button aria-pressed>` in a `role="group"` named by their question, faded rows are
 `disabled` rather than `pointer-events: none`, and the tabs pattern is not used (_journeys_). Every label, hint and
 status string a component renders comes from `useStrings()`, typed in `SiteStrings` and written in every
-`content/<locale>/site.mdx`, with `fill()` for placeholders; a literal `aria-label` in a component is a bug, the brand
-name on the logo excepted (_check_: `src/conventions.test.ts`, `src/mdx/strings.test.ts`; _journeys_:
-`localisedLabels` on `/de`). A link that opens a new tab renders through `ExternalLink`, which appends the hint; a
+`content/<campaign>/<locale>/site.mdx`, with `fill()` for placeholders; a literal `aria-label` in a component is a
+bug with no exception, since the logo's name comes from the campaign config (_check_: `src/conventions.test.ts`,
+`src/mdx/strings.test.ts`; _journeys_: `localisedLabels` on every non-English locale). A link that opens a new tab renders through `ExternalLink`, which appends the hint; a
 `download` link opens no tab (_check_). Decorative images have `alt=""`, a card image beside its heading is
 decorative, and the gallery's photographs have no captions yet; they belong in the Pixabay manifest. The savings figures speak
 their footnote as "note 1", not "star".
@@ -245,7 +261,9 @@ web serving, and the project held no web licence.
 
 | Path | Owns |
 | --- | --- |
-| `content/<locale>/*.mdx` | Every page and the shell, as Markdown with components (_Content_) |
+| `content/<campaign>/<locale>/*.mdx` | Every page and the shell, as Markdown with components (_Content_) |
+| `campaigns/<campaign>/` | The code a campaign may own, behind `campaigns/index.ts` (_Layout_) |
+| `CREDITS.MD` | The media credits table `scripts/pixabay.mjs` regenerates, linked from the README |
 | `src/` | The code (_Layout_) |
 | `public/media/` | The campaign imagery, WebP at the size the page shows |
 | `firebase.json`, `.firebaserc` | The Hosting site `outrun` in the shared project `firebase-cloud-491613`, whose Terraform lives in `poly-glot/firebase-cloud` |
