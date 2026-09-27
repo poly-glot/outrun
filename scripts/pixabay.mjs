@@ -12,17 +12,17 @@ if (!key) {
 const tableHeader = '| Used for | File | Subject | By | Source |';
 const tableHeaderPattern = /^\| *Used for *\| *File *\| *Subject *\| *By *\| *Source *\|/m;
 
-const creditsTableRange = (readme) => {
-    const start = readme.search(tableHeaderPattern);
+const creditsTableRange = (markdown) => {
+    const start = markdown.search(tableHeaderPattern);
 
     if (start < 0) {
-        throw new Error('README.MD has no credits table to refresh');
+        throw new Error('CREDITS.MD has no credits table to refresh');
     }
 
-    return [start, start + readme.slice(start).search(/\n(?!\|)|$/)];
+    return [start, start + markdown.slice(start).search(/\n(?!\|)|$/)];
 };
 
-creditsTableRange(readFileSync('README.MD', 'utf8'));
+creditsTableRange(readFileSync('CREDITS.MD', 'utf8'));
 
 const manifest =JSON.parse(readFileSync(new URL('./pixabay.json', import.meta.url), 'utf8'));
 const media = 'public/media';
@@ -98,8 +98,8 @@ for (const { id, use } of manifest.videos) {
 
 const row = ({ file, page, tags, use, user }) => `| ${use} | \`${file}\` | ${tags.split(',').slice(0, 3).join(',').trim()} | ${user} | [${page.replace('https://', '')}](${page}) |`;
 const table = [tableHeader, '| --- | --- | --- | --- | --- |', ...credits.map(row)].join('\n');
-const readme = readFileSync('README.MD', 'utf8');
-const [start, end] = creditsTableRange(readme);
+const creditsFile = readFileSync('CREDITS.MD', 'utf8');
+const [start, end] = creditsTableRange(creditsFile);
 
-writeFileSync('README.MD', `${readme.slice(0, start)}${table}${readme.slice(end)}`);
+writeFileSync('CREDITS.MD', `${creditsFile.slice(0, start)}${table}${creditsFile.slice(end)}`);
 console.log(`${credits.length} credits written`);
