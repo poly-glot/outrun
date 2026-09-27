@@ -7,15 +7,14 @@ import { useSiteDispatch, useSiteState, useStrings } from '@/state/store';
 import styles from './ModelBar.module.css';
 
 interface ModelBarProps {
-    list: { id: string; label: string }[];
+    ids: string[];
     sectionId: string;
 }
 
-export function ModelBar({ list, sectionId }: ModelBarProps) {
+export function ModelBar({ ids, sectionId }: ModelBarProps) {
     const { selectedModel } = useSiteState();
     const dispatch = useSiteDispatch();
     const strings = useStrings();
-    const selectedLabel = list.find((model) => model.id === selectedModel)?.label ?? '';
 
     const select = (model: string) => {
         dispatch({ model, type: 'selectModel' });
@@ -24,18 +23,18 @@ export function ModelBar({ list, sectionId }: ModelBarProps) {
 
     return (
         <div className={styles.bar} role="group" aria-label={strings.models}>
-            {list.map((model) => (
+            {ids.map((model) => (
                 <button
-                    key={model.id}
+                    key={model}
                     type="button"
-                    aria-pressed={model.id === selectedModel}
-                    className={cx('btn', styles.button, model.id === selectedModel && styles.buttonActive)}
-                    onClick={() => select(model.id)}
+                    aria-pressed={model === selectedModel}
+                    className={cx('btn', styles.button, model === selectedModel && styles.buttonActive)}
+                    onClick={() => select(model)}
                 >
-                    {model.label}
+                    {model}
                 </button>
             ))}
-            <span className="srOnly" aria-live="polite">{fill(strings.showing, { model: selectedLabel })}</span>
+            <span className="srOnly" aria-live="polite">{fill(strings.showing, { model: selectedModel })}</span>
         </div>
     );
 }

@@ -1,8 +1,7 @@
 import type { ReactNode } from 'react';
-import { Section } from '@/components/Section/Section';
+import { Section, type SectionProps } from '@/components/Section/Section';
 import { modelCatalogue } from '@/mdx/models';
 import { notOfType, ofType, textOf } from '@/mdx/nodes';
-import type { SectionProps } from '../section';
 import { DecisionSection } from './DecisionSection';
 
 interface OptionProps {
@@ -29,7 +28,7 @@ interface DecisionProps extends SectionProps {
     recommendLabel: string;
 }
 
-export function Decision({ backgroundColor, children, defaultLabel, id, layout = '', menu, recommendLabel, theme = '' }: DecisionProps) {
+export function Decision({ children, defaultLabel, recommendLabel, ...section }: DecisionProps) {
     const questions = ofType<QuestionProps>(children, Question).map((question) => ({
         id: question.props.id,
         options: ofType<OptionProps>(question.props.children, Option).map((option) => ({ id: option.props.id, label: textOf(option.props.children) })),
@@ -38,7 +37,7 @@ export function Decision({ backgroundColor, children, defaultLabel, id, layout =
     const rest = notOfType(children, Question);
 
     return (
-        <Section id={id} theme={theme} layout={layout} backgroundColor={backgroundColor} menu={menu}>
+        <Section {...section}>
             <DecisionSection
                 defaultLabel={defaultLabel}
                 heading={ofType(rest, 'h2')}

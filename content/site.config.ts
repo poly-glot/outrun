@@ -1,11 +1,10 @@
 export const siteUrl = 'https://outrun.junaid.guru';
 
-export const mediaRoot = '/media/removeable';
+export const mediaRoot = '/media';
 
 export const background = {
     landscape: 'background_concept.webp',
     portrait: 'background_concept_portrait.webp',
-    shadow: true,
 };
 
 export const social = {
@@ -13,9 +12,9 @@ export const social = {
 };
 
 export const models = [
-    { frames: '360/solo', id: 'Solo', label: 'Solo' },
-    { frames: '360/coalition', id: 'Coalition', label: 'Coalition' },
-    { frames: '360/guardian', id: 'Guardian', label: 'Guardian' },
+    { frames: '360/solo', id: 'Solo' },
+    { frames: '360/coalition', id: 'Coalition' },
+    { frames: '360/guardian', id: 'Guardian' },
 ];
 
 export const defaultModel = 'Solo';

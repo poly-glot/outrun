@@ -22,7 +22,7 @@ export function FixedBackground({ background }: { background: Background }) {
     return (
         <div className={styles.container} aria-hidden="true">
             <BackgroundImage background={background} />
-            {background.shadow ? <Shadow name="site" /> : null}
+            <Shadow name="site" />
         </div>
     );
 }

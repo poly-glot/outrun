@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "a11y": "node scripts/a11y.mjs && node scripts/a11y-journeys.mjs",
+    "a11y": "node scripts/a11y.mjs",
     "build": "next build",
     "check": "npm run typecheck && npm run lint && npm test",
     "dev": "next dev -p 3010",

@@ -1,6 +1,5 @@
-import { Section } from '@/components/Section/Section';
+import { Section, type SectionProps } from '@/components/Section/Section';
 import { mediaUrl } from '@/mdx/media';
-import type { SectionProps } from '../section';
 import { HeroSection, type VideoSource } from './HeroSection';
 
 const videoTypes: Record<string, string> = {
@@ -30,9 +29,9 @@ interface HeroProps extends SectionProps {
     video?: string;
 }
 
-export function Hero({ backgroundColor, children, id, image, layout = '', menu, mobileImage, mobileVideo, scrollText, scrollTo, theme = '', video }: HeroProps) {
+export function Hero({ children, image, mobileImage, mobileVideo, scrollText, scrollTo, video, ...section }: HeroProps) {
     return (
-        <Section id={id} theme={theme} layout={layout} backgroundColor={backgroundColor} menu={menu}>
+        <Section {...section}>
             <HeroSection
                 background={{ landscape: mediaUrl(image), portrait: mobileImage ? mediaUrl(mobileImage) : undefined }}
                 heading={children}

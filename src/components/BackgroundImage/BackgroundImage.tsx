@@ -6,7 +6,6 @@ export interface Background {
     backgroundColor?: string;
     landscape?: string;
     portrait?: string;
-    shadow?: boolean;
 }
 
 interface BackgroundImageProps {

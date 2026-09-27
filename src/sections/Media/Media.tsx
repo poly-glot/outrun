@@ -1,6 +1,5 @@
-import { Section } from '@/components/Section/Section';
+import { Section, type SectionProps } from '@/components/Section/Section';
 import { listGallery, mediaUrl } from '@/mdx/media';
-import type { SectionProps } from '../section';
 import { MediaSection } from './MediaSection';
 
 interface MediaProps extends SectionProps {
@@ -10,9 +9,9 @@ interface MediaProps extends SectionProps {
     folder: string;
 }
 
-export function Media({ backgroundColor, children, downloadAll, downloadAllText, downloadText, folder, id, layout = '', menu, theme = '' }: MediaProps) {
+export function Media({ children, downloadAll, downloadAllText, downloadText, folder, ...section }: MediaProps) {
     return (
-        <Section id={id} theme={theme} layout={layout} backgroundColor={backgroundColor} menu={menu}>
+        <Section {...section}>
             <MediaSection downloadAll={mediaUrl(downloadAll)} downloadAllText={downloadAllText} downloadText={downloadText} gallery={listGallery(folder)}>
                 {children}
             </MediaSection>

@@ -1,3 +1,4 @@
 {
-    "entry": ["content/**/*.mdx", "scripts/*.{mjs,cjs}"]
+    "entry": ["content/**/*.mdx", "scripts/*.{mjs,cjs}"],
+    "ignore": [".claude/**"]
 }

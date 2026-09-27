@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 src="$1"
-out="${2:-public/media/removeable}"
+out="${2:-public/media}"
 desktop="scale=1920:-2"
 mobile="crop=ih*9/16:ih:iw*0.41:0,scale=720:1280"
 av1="-fps_mode passthrough -c:v libsvtav1 -preset 6 -g 300 -pix_fmt yuv420p -svtav1-params tune=0 -movflags +faststart"

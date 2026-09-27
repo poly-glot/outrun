@@ -73,7 +73,7 @@ export default async function LocalePage({ params }: PageProps) {
     return (
         <>
             <SkipLink />
-            <FixedBackground background={{ landscape: mediaUrl(background.landscape), portrait: mediaUrl(background.portrait), shadow: background.shadow }} />
+            <FixedBackground background={{ landscape: mediaUrl(background.landscape), portrait: mediaUrl(background.portrait) }} />
             <Header hasContact={contact !== null} locale={locale} locales={locales} />
 
             {sections.length > 0 ? <SideMenu items={sections} /> : null}

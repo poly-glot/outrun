@@ -20,6 +20,7 @@ export function Modal({ contact, locale }: { contact: ReactNode; locale: string 
     const strings = useStrings();
     const dialogRef = useRef<HTMLDialogElement>(null);
     const open = modal.type !== '';
+    const videoTitle = modal.type === 'youtube' ? fill(strings.playVideo, { title: modal.title }) : '';
 
     useEffect(() => {
         const dialog = dialogRef.current;
@@ -38,7 +39,7 @@ export function Modal({ contact, locale }: { contact: ReactNode; locale: string 
             ref={dialogRef}
             id="mainmodal"
             className={styles.modal}
-            aria-label={modal.type === 'youtube' ? fill(strings.playVideo, { title: modal.title }) : strings.contact}
+            aria-label={videoTitle || strings.contact}
             onClose={() => dispatch({ type: 'closeModal' })}
         >
             <HeaderBar inverse locale={locale} />
@@ -52,7 +53,7 @@ export function Modal({ contact, locale }: { contact: ReactNode; locale: string 
                     {modal.type === 'youtube' ? (
                         <m.div key="video" className={styles.video} {...fade} transition={{ duration: motionPaused ? 0 : 0.3 }}>
                             <div className={styles.videoFrame}>
-                                <YouTubePlayer videoId={modal.videoId} />
+                                <YouTubePlayer locale={locale} title={videoTitle} videoId={modal.videoId} />
                             </div>
                         </m.div>
                     ) : null}

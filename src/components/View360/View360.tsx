@@ -2,7 +2,6 @@
 
 import { useRef, useState, type PointerEvent } from 'react';
 import { useInView } from 'framer-motion';
-import { FrameStack } from '@/components/FrameStack/FrameStack';
 import { Loading } from '@/components/Loading/Loading';
 import { usePreloaded } from '@/lib/usePreloaded';
 import { useStrings } from '@/state/store';
@@ -47,7 +46,25 @@ export function View360({ images }: { images: string[] }) {
                 onPointerUp={onPointerUp}
                 onPointerCancel={onPointerUp}
             >
-                {loaded ? <FrameStack frames={images} active={frame} width={800} height={600} /> : <Loading />}
+                {loaded ? (
+                    <div className={styles.stack}>
+                        {images.map((src, index) => (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                                key={src}
+                                src={src}
+                                alt=""
+                                width={800}
+                                height={600}
+                                draggable={false}
+                                className={styles.frame}
+                                style={{ visibility: index === frame ? 'visible' : 'hidden' }}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <Loading />
+                )}
             </div>
 
             <input

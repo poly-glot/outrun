@@ -29,7 +29,7 @@ export function TechnicalSection({ defaultLabel, facts, factsHeading, heading, i
     return (
         <div className={styles.container}>
             <h2 className="srOnly">{heading}</h2>
-            <ModelBar list={models.list} sectionId={id} />
+            <ModelBar ids={models.ids} sectionId={id} />
 
             <div className={cx('contentContainerNarrow', styles.content)}>
                 <div className={styles.text}>

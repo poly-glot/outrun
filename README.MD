@@ -202,7 +202,7 @@ is missing a string.
 only when it passes. `scripts/a11y.mjs` runs axe-core with the WCAG 2.x A and AA tags over the six pages in its `PAGES`
 list at 1366×768 and 390×844, after scrolling each page so scroll-driven reveals have settled, and fails on any serious
 or critical violation.
-`scripts/a11y-journeys.mjs` then drives the keyboard: the skip link, the dialog (open, four Tabs stay inside, Escape
+The same script then drives the keyboard: the skip link, the dialog (open, four Tabs stay inside, Escape
 returns focus to the opener), the menu (open focuses the first link, Escape returns to the button), the closed menu
 (its hidden labels let taps through to the page at both widths, and its rings take them on desktop), the rendered
 outline and section names and duplicate ids on four pages, the spoken counter values, the reading order of the

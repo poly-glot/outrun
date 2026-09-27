@@ -25,7 +25,7 @@ const creditsTableRange = (readme) => {
 creditsTableRange(readFileSync('README.MD', 'utf8'));
 
 const manifest =JSON.parse(readFileSync(new URL('./pixabay.json', import.meta.url), 'utf8'));
-const media = 'public/media/removeable';
+const media = 'public/media';
 const credits = [];
 
 const hit = async (path, id) => {

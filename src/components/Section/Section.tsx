@@ -6,8 +6,8 @@ import { cx } from '@/lib/cx';
 import { activeSectionId, sectionProgress } from '@/state/sectionProgress';
 import styles from './Section.module.css';
 
-export type Theme = '' | 'white' | 'black';
-export type Layout = '' | 'normalPage';
+type Theme = '' | 'white' | 'black';
+type Layout = '' | 'normalPage';
 
 const ProgressContext = createContext<MotionValue<number> | null>(null);
 
@@ -21,16 +21,16 @@ export function useSectionProgress(): MotionValue<number> {
     return progress;
 }
 
-interface SectionProps {
+export interface SectionProps {
     backgroundColor?: string;
-    children: ReactNode;
+    children?: ReactNode;
     id: string;
-    layout: Layout;
+    layout?: Layout;
     menu: string;
-    theme: Theme;
+    theme?: Theme;
 }
 
-export function Section({ backgroundColor, children, id, layout, menu, theme }: SectionProps) {
+export function Section({ backgroundColor, children, id, layout = '', menu, theme = '' }: SectionProps) {
     const ref = useRef<HTMLElement>(null);
     const progress = sectionProgress(id);
     const { scrollYProgress } = useScroll({ offset: ['start end', 'end start'], target: ref });

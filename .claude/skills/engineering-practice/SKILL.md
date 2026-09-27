@@ -59,7 +59,7 @@ new element and leaves everything else the bug touches broken.
 ## 4. Close the gap that let it through
 
 When a bug reached the page past the gates, add the check that would have caught it in the same change: a journey in
-`scripts/a11y-journeys.mjs` or a node test beside the code. Show it failing on the unfixed code before it passes on the
+a journey in `scripts/a11y.mjs` or a node test beside the code. Show it failing on the unfixed code before it passes on the
 fix; a check that has never failed proves nothing.
 
 ## 5. Leave the docs true

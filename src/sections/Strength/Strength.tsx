@@ -1,15 +1,14 @@
 import type { ReactNode } from 'react';
-import { Section } from '@/components/Section/Section';
+import { Section, type SectionProps } from '@/components/Section/Section';
 import { icons } from '@content/icons';
-import type { SectionProps } from '../section';
 import { ChartFigure } from './ChartFigure';
 import { SavingFigure } from './SavingFigure';
 import { StrengthSection } from './StrengthSection';
 import styles from './StrengthSection.module.css';
 
-export function Strength({ backgroundColor, children, id, layout = '', menu, theme = '' }: SectionProps) {
+export function Strength({ children, ...section }: SectionProps) {
     return (
-        <Section id={id} theme={theme} layout={layout} backgroundColor={backgroundColor} menu={menu}>
+        <Section {...section}>
             <StrengthSection>{children}</StrengthSection>
         </Section>
     );

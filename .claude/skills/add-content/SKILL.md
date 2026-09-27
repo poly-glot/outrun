@@ -23,7 +23,7 @@ and this skill does not repeat it.
   `SiteStrings` in `src/mdx/pages.ts`. A new string goes into the interface and every locale's `site.mdx` together.
 - **Content changes stay content.** If the look you were asked for needs a code fix, such as a shared component that
   renders wrongly, make it a separate change and name it in your report with the reason, so it can be reviewed apart.
-- **Media names are relative to `public/media/removeable/`.** Pictures are WebP at the size the page shows, because
+- **Media names are relative to `public/media/`.** Pictures are WebP at the size the page shows, because
   the site is a static export with no image optimizer; only the gallery downloads and `social.jpg` are JPEG.
 
 ## Recipes

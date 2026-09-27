@@ -38,13 +38,13 @@ filter only make sense then.
 2. **Copy.** Rewrite `content/<locale>/index.mdx` slot by slot, then `site.mdx` (strings and footer), `roadshow.mdx`
    (dates and registration links) and `accessibility.mdx` (owner and review date), following the `add-content` skill.
    Keep every id identical across locales. A German commercial site also needs an Impressum page.
-3. **Options and ids.** In `content/site.config.ts` set `siteUrl`, the three `models` (id, label, frame folder),
+3. **Options and ids.** In `content/site.config.ts` set `siteUrl`, the three `models` (id, which is also the button text, and frame folder),
    `defaultModel`, the background pair and the share card, and in `public/manifest.json` the `name` and `short_name`:
    like `siteUrl` they name the site, on a phone's home screen, so they change with the domain rather than wait for
    the brand. A model id is also written in the MDX of every locale, in `<ModelText model>`, the keys of each
    `<QuickFact values>` and every `<Feature models>` list: rename them all, or those parts of the page render empty
    while `npm run check` stays green. Rewrite `recommendModel` and its table test for the new questions.
-   `scripts/a11y-journeys.mjs` looks up the sections `home`, `strength`, `miles` and `ways` by id: keep those ids or
+   `scripts/a11y.mjs` looks up the sections `home`, `strength`, `miles` and `ways` by id: keep those ids or
    update the script.
 4. **Brand.** The brand name is the logo's `aria-label` in `src/components/Header/Header.tsx` and `brandLabel` in
    `src/conventions.test.ts`; change both together. The brand colour is `--brand` in `src/app/tokens.css`, plus

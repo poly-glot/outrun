@@ -17,6 +17,17 @@
     cursor: grabbing;
 }
 
+.stack {
+    display: grid;
+    width: 100%;
+}
+
+.frame {
+    grid-area: 1 / 1;
+    height: auto;
+    width: 100%;
+}
+
 .slider {
     -webkit-appearance: none;
     appearance: none;

@@ -1,44 +1,21 @@
-'use client';
-
-import { useEffect, useRef } from 'react';
-import { loadYouTubeApi, type YouTubePlayer as Player } from '@/lib/youtube';
 import styles from './YouTubePlayer.module.css';
 
-export function YouTubePlayer({ videoId }: { videoId: string }) {
-    const mount = useRef<HTMLDivElement>(null);
+interface YouTubePlayerProps {
+    locale: string;
+    title: string;
+    videoId: string;
+}
 
-    useEffect(() => {
-        const host = mount.current;
+export function YouTubePlayer({ locale, title, videoId }: YouTubePlayerProps) {
+    const query = new URLSearchParams({ autoplay: '1', cc_lang_pref: locale, cc_load_policy: '1', playsinline: '1', rel: '0' });
 
-        if (!host) {
-            return;
-        }
-
-        let cancelled = false;
-        let player: Player | null = null;
-        const target = document.createElement('div');
-        host.append(target);
-
-        loadYouTubeApi().then((YT) => {
-            if (cancelled) {
-                return;
-            }
-
-            player = new YT.Player(target, {
-                height: '100%',
-                host: 'https://www.youtube-nocookie.com',
-                playerVars: { autoplay: 1, cc_lang_pref: document.documentElement.lang, cc_load_policy: 1, playsinline: 1, rel: 0 },
-                videoId,
-                width: '100%',
-            });
-        });
-
-        return () => {
-            cancelled = true;
-            player?.destroy();
-            target.remove();
-        };
-    }, [videoId]);
-
-    return <div ref={mount} className={styles.player} />;
+    return (
+        <iframe
+            className={styles.player}
+            src={`https://www.youtube-nocookie.com/embed/${videoId}?${query}`}
+            title={title}
+            allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+            allowFullScreen
+        />
+    );
 }
