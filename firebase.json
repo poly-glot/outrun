@@ -19,7 +19,7 @@
                 "source": "**"
             }
         ],
-        "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+        "ignore": ["firebase.json", "**/.*", "**/media/**", "**/node_modules/**"],
         "public": "out",
         "redirects": [
             { "destination": "/outrun/en", "source": "/", "type": 302 },

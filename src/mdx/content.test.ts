@@ -37,12 +37,11 @@ for (const campaign of campaigns) {
     const campaignRoot = path.join(contentRoot, campaign);
     const config = (await import(`../../content/${campaign}/campaign.config.ts`)) as {
         background: { landscape: string; portrait: string };
-        mediaBase: string;
     };
     const locales = directories(campaignRoot);
     const pagesOf = (locale: string) => fs.readdirSync(path.join(campaignRoot, locale)).filter((file) => file.endsWith('.mdx') && file !== 'site.mdx');
     const read = (locale: string, file: string) => fs.readFileSync(path.join(campaignRoot, locale, file), 'utf8');
-    const publicMedia = path.join(import.meta.dirname, '../../public', config.mediaBase);
+    const publicMedia = path.join(import.meta.dirname, '../../public/media');
     const mediaExists = (file: string) => fs.existsSync(path.join(publicMedia, file));
 
     for (const locale of locales) {

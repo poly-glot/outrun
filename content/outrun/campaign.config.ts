@@ -4,7 +4,7 @@ export const siteUrl = 'https://outrun.junaid.guru';
 
 export const defaultLocale = 'en';
 
-export const mediaBase = '/media';
+export const mediaBase = 'https://storage.googleapis.com/firebase-cloud-491613-outrun-media/v1';
 
 export const logo = { kind: 'component' } as const;
 

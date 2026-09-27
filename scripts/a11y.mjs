@@ -72,7 +72,7 @@ async function settleReveals(page) {
 
 async function auditPage(browser, path, viewport) {
     const page = await browser.newPage({ viewport });
-    const response = await page.goto(BASE_URL + path, { waitUntil: 'networkidle' });
+    const response = await page.goto(BASE_URL + path, { waitUntil: 'load' });
 
     if (response?.status() === 404) {
         await page.close();
@@ -102,11 +102,11 @@ function report(label, violations) {
 
 async function open(browser, path, viewport = DESKTOP, motionPaused = false) {
     const page = await browser.newPage({ viewport });
-    await page.goto(BASE_URL + path, { waitUntil: 'networkidle' });
+    await page.goto(BASE_URL + path, { waitUntil: 'load' });
 
     if (motionPaused) {
         await page.evaluate(() => localStorage.setItem('motion', 'paused/false'));
-        await page.reload({ waitUntil: 'networkidle' });
+        await page.reload({ waitUntil: 'load' });
     }
 
     await page.waitForTimeout(800);
